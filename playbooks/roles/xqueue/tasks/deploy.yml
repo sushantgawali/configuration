@@ -36,6 +36,12 @@
   notify:
     - restart xqueue
 
+- name: fix django logging inside docker
+  lineinfile:
+    dest={{xqueue_code_dir}}/xqueue/logsettings.py
+    regexp="/dev/log"
+    state=absent
+
 
 # Install the python pre requirements into {{ xqueue_venv_dir }}
 - name : install python pre-requirements

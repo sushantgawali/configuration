@@ -48,6 +48,12 @@
   - "restart edxapp"
   - "restart edxapp_workers"
 
+- name: fix django logging inside docker
+  lineinfile: 
+    dest={{edxapp_code_dir}}/common/lib/logsettings.py
+    regexp="/dev/log"
+    state=absent
+
 - name: checkout theme
   git: >
     dest={{ edxapp_app_dir }}/themes/{{edxapp_theme_name}}
