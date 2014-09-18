@@ -108,10 +108,10 @@
   sudo_user: "{{ supervisor_user }}"
   with_items: supervisor_pip_pkgs
 
-- name: create supervisor upstart job
+- name: create supervisor init script
   template: >
-    src=etc/init/supervisor-upstart.conf.j2 dest=/etc/init/{{ supervisor_service }}.conf
-    owner=root group=root
+    src=etc/init.d/supervisor dest=/etc/init.d/{{ supervisor_service }}
+    owner=root group=root mode=0755
 
 # This script is aws specific and looks up instances
 # tags and enables services based on the 'services' tag

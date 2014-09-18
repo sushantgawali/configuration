@@ -8,6 +8,7 @@ chmod=0700                       ; sockef file mode (default 0700)
 logfile={{ supervisor_log_dir }}/supervisord.log ; (main log file;default $CWD/supervisord.log)
 pidfile={{ supervisor_data_dir }}/supervisord.pid ; (supervisord pidfile;default supervisord.pid)
 childlogdir={{ supervisor_log_dir }}            ; ('AUTO' child log dir, default $TEMP)
+nodaemon=true
 
 ; the below section must remain in the config file for RPC
 ; (supervisorctl/web interface) to work, additional interfaces may be

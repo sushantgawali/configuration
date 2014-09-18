@@ -73,11 +73,11 @@
     - restart ora_celery
 
   #Needed if using redis to prevent memory issues
-- name: change memory commit settings -- needed for redis
-  command: sysctl vm.overcommit_memory=1
-  notify:
-    - restart ora
-    - restart ora_celery
+#- name: change memory commit settings -- needed for redis
+#  command: sysctl vm.overcommit_memory=1
+#  notify:
+#    - restart ora
+#    - restart ora_celery
 
 - name: syncdb and migrate
   shell: SERVICE_VARIANT=ora {{ora_venv_dir}}/bin/django-admin.py syncdb --migrate --noinput --settings=edx_ora.aws --pythonpath={{ora_code_dir}}

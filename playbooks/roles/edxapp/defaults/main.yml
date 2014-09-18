@@ -192,10 +192,10 @@ EDXAPP_PAID_COURSE_REGISTRATION_CURRENCY: ['usd', '$']
 EDXAPP_NO_PREREQ_INSTALL: 1
 
 # whether to setup the python codejail or not
-EDXAPP_PYTHON_SANDBOX: true
+EDXAPP_PYTHON_SANDBOX: false
 # this next setting, if true, turns on actual sandbox enforcement.  If not true,
 # it puts the sandbox in 'complain' mode, for reporting but not enforcement
-EDXAPP_SANDBOX_ENFORCE: true
+EDXAPP_SANDBOX_ENFORCE: false
 
 # Supply authorized keys used for remote management via the user
 # role.

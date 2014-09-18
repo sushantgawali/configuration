@@ -140,6 +140,11 @@
   - "restart edxapp"
   - "restart edxapp_workers"
 
+- name: fix freetype/PIL linking bug
+  file:
+    src=/usr/include/freetype2
+    dest=/usr/local/include/freetype
+    state=link
 
 # Install the python pre requirements into {{ edxapp_venv_dir }}
 - name : install python pre-requirements

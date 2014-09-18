@@ -32,6 +32,9 @@
     - "{{ mongo_dbpath }}"
     - "{{ mongo_log_dir }}"
 
+- name: create mongo pid dir
+  file: path="/var/run/mongodb/" state=directory owner=mongodb
+
 - name: stop mongo service
   service: name=mongodb state=stopped
 
@@ -51,6 +54,9 @@
 - name: copy configuration template
   template: src=mongodb.conf.j2 dest=/etc/mongodb.conf backup=yes
   notify: restart mongo
+
+- name: copy init script
+  copy: src=mongodb dest=/etc/init.d/mongodb mode=755
 
 - name: start mongo service
   service: name=mongodb state=started
