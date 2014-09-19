@@ -167,7 +167,6 @@ ora_debian_pkgs:
   - libblas-dev
   - liblapack3gf
   - liblapack-dev
-  - libatlas-base-dev
   - redis-server
 
 ora_ease_debian_pkgs:
@@ -179,7 +178,6 @@ ora_ease_debian_pkgs:
   - libblas-dev
   - liblapack3gf
   - liblapack-dev
-  - libatlas-base-dev
   - libxml2-dev
   - libxslt1-dev
   - aspell
