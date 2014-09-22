@@ -1,0 +1,16 @@
+---
+runit_services:
+  - elasticsearch
+  - memcached
+  - mongodb
+  - mysql
+  - nginx
+  - rabbitmq-server
+  - redis-server
+  - supervisor
+  - supervisor.devpi
+
+runit_services_stop:
+  - mysql
+  - rabbitmq-server
+

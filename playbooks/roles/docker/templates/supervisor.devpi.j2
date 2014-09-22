@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+exec /sbin/setuser www-data /edx/app/devpi/venvs/supervisor/bin/supervisord -c /edx/app/devpi/supervisor/supervisord.conf
+

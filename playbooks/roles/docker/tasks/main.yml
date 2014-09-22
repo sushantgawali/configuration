@@ -1,0 +1,30 @@
+# Makes necessary changes to enable running edX inside a Docker container
+---
+- name: Create runit service folders
+  file: 
+    path=/etc/service/{{ item }}/control
+    state=directory
+  with_items: runit_services
+
+- name: Copy runit scripts
+  template: 
+    src={{item}}.j2
+    dest=/etc/service/{{ item }}/run
+    mode=0755
+  with_items: runit_services
+
+- name: Copy runit stop scripts
+  template: 
+    src={{item}}-stop.j2
+    dest=/etc/service/{{ item }}/control/d
+    mode=0755
+  with_items: runit_services_stop
+
+- name: Link init.d scripts to runit
+  file:
+    src=/usr/bin/sv
+    path=/etc/init.d/{{ item }}
+    state=link
+    force=true
+  with_items: runit_services
+

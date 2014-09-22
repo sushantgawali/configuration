@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+ulimit -f unlimited
+ulimit -t unlimited
+ulimit -v unlimited
+ulimit -n 64000
+ulimit -m unlimited
+exec /sbin/setuser mongodb /usr/bin/mongod --config /etc/mongodb.conf
+
