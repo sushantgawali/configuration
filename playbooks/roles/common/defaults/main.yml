@@ -67,7 +67,7 @@ common_debian_pkgs:
   - lynx-cur
   - logrotate
   - mosh
-  - rsyslog
+  - syslog-ng
   - screen
   - tree
   - git

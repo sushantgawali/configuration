@@ -53,18 +53,18 @@
     extra_args="-i {{ COMMON_PYPI_MIRROR_URL }}"
   with_items: common_pip_pkgs
 
-- name: Install rsyslog configuration for edX
-  template: >
-    dest=/etc/rsyslog.d/99-edx.conf
-    src=edx_rsyslog.j2
-    owner=root group=root mode=644
-  notify: restart rsyslogd
-
-- name: Remove the default rsyslog configuration
-  file:
-    path=/etc/rsyslog.d/50-default.conf
-    state=absent
-  notify: restart rsyslogd
+#- name: Install rsyslog configuration for edX
+#  template: >
+#    dest=/etc/rsyslog.d/99-edx.conf
+#    src=edx_rsyslog.j2
+#    owner=root group=root mode=644
+#  notify: restart rsyslogd
+#
+#- name: Remove the default rsyslog configuration
+#  file:
+#    path=/etc/rsyslog.d/50-default.conf
+#    state=absent
+#  notify: restart rsyslogd
 
   # This is in common to keep all logrotation config
   # in the same role
