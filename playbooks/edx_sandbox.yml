@@ -48,3 +48,5 @@
       when: COMMON_ENABLE_SPLUNKFORWARDER
     - role: newrelic
       when: COMMON_ENABLE_NEWRELIC
+    # run the docker scripts again to relink init.d scripts to runit
+    - { role: 'docker', tags: 'docker' }
