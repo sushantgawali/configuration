@@ -420,7 +420,9 @@
     - deploy
 
 - include: xml.yml
-  tags: deploy
+  tags:
+    - deploy
+    - courses
   when: EDXAPP_XML_FROM_GIT
 
   # call supervisorctl update. this reloads
