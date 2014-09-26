@@ -1,0 +1,64 @@
+---
+
+# Example sandbox configuration
+# for single server community
+# installs
+
+- name: Configure instance(s)
+  hosts: all
+  sudo: True
+  gather_facts: True
+  vars:
+    migrate_db: "yes"
+    openid_workaround: True
+    EDXAPP_LMS_NGINX_PORT: '80'
+    edx_platform_version: 'release'
+    # Set to false if deployed behind another proxy/load balancer.
+    NGINX_SET_X_FORWARDED_HEADERS: True
+    # These should stay false for the public AMI
+    COMMON_ENABLE_DATADOG: False
+    COMMON_ENABLE_SPLUNKFORWARDER: False
+    EDXAPP_XML_COURSES:
+      - course: edx4edx
+        disposition: "no static import"
+        org: MITx
+        repo_name: edx4edx_lite
+        repo_url: https://github.com/mitocw/edx4edx_lite
+        run: edx4edx
+        version: master
+    EDXAPP_XML_FROM_GIT: true
+    EDXAPP_XML_MAPPINGS:
+      appsembler/edx-demo-course/1: xml
+      appsembler/edx4edx_lite/1: xml
+  roles:
+    - { role: 'docker', tags: 'docker' }
+    - role: nginx
+      nginx_sites:
+      - cms
+      - lms
+      - forum
+      - ora
+      - xqueue
+      nginx_default_sites:
+      - lms
+    - edxlocal
+    - mongo
+    - { role: 'edxapp', celery_worker: True }
+    - edxapp
+    - demo
+    - { role: 'rabbitmq', rabbitmq_ip: '127.0.0.1' }
+    - oraclejdk
+    - elasticsearch
+    - forum
+    - { role: "xqueue", update_users: True }
+    - ora
+    - certs
+    - edx_ansible
+    - role: datadog
+      when: COMMON_ENABLE_DATADOG
+    - role: splunkforwarder
+      when: COMMON_ENABLE_SPLUNKFORWARDER
+    - role: newrelic
+      when: COMMON_ENABLE_NEWRELIC
+    # run the docker scripts again to relink init.d scripts to runit
+    - { role: 'docker', tags: 'docker' }
