@@ -5,6 +5,7 @@
     path=/etc/service/{{ item }}/control
     state=directory
   with_items: runit_services
+  tags: runit
 
 - name: Copy runit scripts
   template: 
@@ -12,6 +13,7 @@
     dest=/etc/service/{{ item }}/run
     mode=0755
   with_items: runit_services
+  tags: runit
 
 - name: Copy runit stop scripts
   template: 
@@ -19,6 +21,7 @@
     dest=/etc/service/{{ item }}/control/d
     mode=0755
   with_items: runit_services_stop
+  tags: runit
 
 - name: Link init.d scripts to runit
   file:
@@ -27,4 +30,12 @@
     state=link
     force=true
   with_items: runit_services
+  tags: runit
+
+- name: Copy customized settings files
+  copy:
+    src=docker.py dest=/edx/app/edxapp/edx-platform/{{item}}/envs/
+  with_items:
+    - cms
+    - lms
 

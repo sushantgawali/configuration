@@ -30,7 +30,7 @@
     EDXAPP_XML_MAPPINGS:
       appsembler/edx4edx_lite/1: xml
   roles:
-    - { role: 'docker', tags: 'docker' }
+    - { role: 'docker', tags: 'runit' }
     - role: nginx
       nginx_sites:
       - cms

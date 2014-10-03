@@ -31,7 +31,7 @@
       appsembler/edx-demo-course/1: xml
       appsembler/edx4edx_lite/1: xml
   roles:
-    - { role: 'docker', tags: 'docker' }
+    - { role: 'docker', tags: 'runit' }
     - role: nginx
       nginx_sites:
       - cms
@@ -46,7 +46,7 @@
     - { role: 'edxapp', celery_worker: True }
     - edxapp
     - demo
-    - { role: 'rabbitmq', rabbitmq_ip: '127.0.0.1' }
+    - { role: 'rabbitmq', rabbitmq_ip: '127.0.0.1', tags: "rabbit"}
     - oraclejdk
     - elasticsearch
     - forum
