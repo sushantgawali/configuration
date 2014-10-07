@@ -31,7 +31,7 @@
       appsembler/edx-demo-course/1: xml
       appsembler/edx4edx_lite/1: xml
   roles:
-    - { role: 'docker', tags: 'runit' }
+    - { role: 'docker', version: 'full', tags: 'runit' }
     - role: nginx
       nginx_sites:
       - cms
@@ -61,4 +61,4 @@
     - role: newrelic
       when: COMMON_ENABLE_NEWRELIC
     # run the docker scripts again to relink init.d scripts to runit
-    - { role: 'docker', tags: 'docker' }
+    - { role: 'docker', version: 'full', tags: 'docker' }

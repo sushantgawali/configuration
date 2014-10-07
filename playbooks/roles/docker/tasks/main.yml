@@ -4,7 +4,7 @@
   file: 
     path=/etc/service/{{ item }}/control
     state=directory
-  with_items: runit_services
+  with_items: runit_{{version}}_services
   tags: runit
 
 - name: Copy runit scripts
@@ -12,7 +12,7 @@
     src={{item}}.j2
     dest=/etc/service/{{ item }}/run
     mode=0755
-  with_items: runit_services
+  with_items: runit_{{version}}_services
   tags: runit
 
 - name: Copy runit stop scripts
@@ -20,7 +20,7 @@
     src={{item}}-stop.j2
     dest=/etc/service/{{ item }}/control/d
     mode=0755
-  with_items: runit_services_stop
+  with_items: runit_{{version}}_services_stop
   tags: runit
 
 - name: Link init.d scripts to runit
@@ -29,7 +29,7 @@
     path=/etc/init.d/{{ item }}
     state=link
     force=true
-  with_items: runit_services
+  with_items: runit_{{version}}_services
   tags: runit
 
 - name: Copy customized settings files
