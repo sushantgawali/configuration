@@ -10,4 +10,5 @@ EMAIL_HOST_PASSWORD = os.environ.get("MANDRILL_API_KEY", "")
 LMS_BASE = os.environ.get("EDX_LMS_BASE", "")
 PREVIEW_LMS_BASE = os.environ.get("EDX_PREVIEW_LMS_BASE", "")
 CMS_BASE = os.environ.get("EDX_CMS_BASE", "")
+TEMPLATE_CONTEXT_PROCESSORS += ('appsembler.context_processors.intercom',)
 
