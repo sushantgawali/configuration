@@ -31,11 +31,3 @@
     force=true
   with_items: runit_{{version}}_services
   tags: runit
-
-- name: Copy customized settings files
-  copy:
-    src=docker.py dest=/edx/app/edxapp/edx-platform/{{item}}/envs/
-  with_items:
-    - cms
-    - lms
-
