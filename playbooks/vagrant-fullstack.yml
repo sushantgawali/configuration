@@ -18,7 +18,6 @@
   vars_files:
     - "group_vars/all"
   roles:
-    - { role: 'docker', tags: 'docker' }
     - edx_ansible
     - user
     - role: nginx
