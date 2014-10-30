@@ -5,6 +5,7 @@
     path=/etc/service/{{ item }}/control
     state=directory
   with_items: runit_{{version}}_services
+  when: runit_service == item or runit_service == "all"
   tags: runit
 
 - name: Copy runit scripts
@@ -13,6 +14,7 @@
     dest=/etc/service/{{ item }}/run
     mode=0755
   with_items: runit_{{version}}_services
+  when: runit_service == item or runit_service == "all"
   tags: runit
 
 - name: Copy runit stop scripts
@@ -21,6 +23,7 @@
     dest=/etc/service/{{ item }}/control/d
     mode=0755
   with_items: runit_{{version}}_services_stop
+  when: runit_service == item or runit_service == "all"
   tags: runit
 
 - name: Link init.d scripts to runit
@@ -30,4 +33,5 @@
     state=link
     force=true
   with_items: runit_{{version}}_services
+  when: runit_service == item or runit_service == "all"
   tags: runit

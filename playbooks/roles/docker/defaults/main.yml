@@ -25,3 +25,5 @@ runit_lite_services_stop:
 runit_full_services_stop:
   - mysql
   - rabbitmq-server
+
+version: full
