@@ -46,4 +46,4 @@
     - role: newrelic
       when: COMMON_ENABLE_NEWRELIC
     # run the docker scripts again to relink init.d scripts to runit
-    - { role: 'docker', version: 'lite', tags: 'docker' }
+    - { role: 'docker', version: 'lite', tags: 'runit' }
