@@ -34,10 +34,10 @@
     - edxlocal
     - mongo
     - edxapp
-    - demo
     - oraclejdk
     - elasticsearch
     - forum
+    - demo
     - edx_ansible
     - role: datadog
       when: COMMON_ENABLE_DATADOG
