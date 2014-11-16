@@ -1,6 +1,6 @@
 upstream lms-preview-backend {
     {% for host in nginx_lms_preview_gunicorn_hosts %}
-        server {{ host }}:{{ edxapp_lms_preview_gunicorn_port }} fail_timeout=0;
+        server {{ host }}:{{ edxapp_lms_gunicorn_port }} fail_timeout=0;
     {% endfor %}
 }
 

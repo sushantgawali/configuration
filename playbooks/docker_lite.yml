@@ -28,6 +28,7 @@
       nginx_sites:
       - cms
       - lms
+      - lms-preview
       - forum
       nginx_default_sites:
       - lms
