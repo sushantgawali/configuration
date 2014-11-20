@@ -18,29 +18,26 @@
     # These should stay false for the public AMI
     COMMON_ENABLE_DATADOG: False
     COMMON_ENABLE_SPLUNKFORWARDER: False
-    EDXAPP_XML_COURSES:
-      - course: edx4edx
-        disposition: "no static import"
-        org: MITx
-        repo_name: edx4edx_lite
-        repo_url: https://github.com/mitocw/edx4edx_lite
-        run: edx4edx
-        version: master
-    EDXAPP_XML_FROM_GIT: true
-    EDXAPP_XML_MAPPINGS:
-      appsembler/edx-demo-course/1: xml
-      appsembler/edx4edx_lite/1: xml
+    OPENEDX_RELEASE: 'aspen.1'
+    # used for releases
+    edx_platform_version: 'docker_release'
+    ora2_version: '{{ OPENEDX_RELEASE | default("master") }}'
+    certs_version: '{{ OPENEDX_RELEASE | default("master") }}'
+    forum_version: '{{ OPENEDX_RELEASE | default("master") }}'
+    xqueue_version: '{{ OPENEDX_RELEASE | default("master") }}'
   roles:
+    - edx_ansible
     - { role: 'docker', version: 'full', tags: 'runit' }
     - role: nginx
       nginx_sites:
       - cms
       - lms
       - forum
-      - ora
       - xqueue
+      - certs
       nginx_default_sites:
       - lms
+      - cms
     - edxlocal
     - mongo
     - { role: 'edxapp', celery_worker: True }
@@ -51,7 +48,6 @@
     - elasticsearch
     - forum
     - { role: "xqueue", update_users: True }
-    - ora
     - certs
     - edx_ansible
     - role: datadog

@@ -43,6 +43,9 @@ mongo_aws_stack_name: "tag_aws_cloudformation_stack-name_"
 # you can disable the journal to reduce disk usage
 mongo_enable_journal: True
 
+# Enable smallfiles to reduce the DB size and avoid problems when building the image locally
+mongo_enable_smallfiles: True
+
 # We can do regular backups of MongoDB to S3.
 MONGO_S3_BACKUP: false
 # backup cron time:

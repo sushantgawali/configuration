@@ -26,6 +26,10 @@ journal=false
 nojournal=true
 {% endif %}
 
+{% if mongo_enable_smallfiles %}
+smallfiles=true
+{% endif %}
+
 {% if MONGO_CLUSTERED %}
 keyFile = {{ mongo_key_file }}
 replSet = {{ mongo_repl_set }}

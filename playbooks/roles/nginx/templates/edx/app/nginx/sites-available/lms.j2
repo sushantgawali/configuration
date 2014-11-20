@@ -99,13 +99,4 @@ server {
   {% include "robots.j2" %}
   {% include "static-files.j2" %}
 
-  # Forward to HTTPS if we're an HTTP request...
-  if ($http_x_forwarded_proto = "http") {
-    set $do_redirect "true";
-  }
-
-  # Run our actual redirect...
-  if ($do_redirect = "true") {
-    rewrite ^ https://$host$request_uri? permanent;
-  }
 }
