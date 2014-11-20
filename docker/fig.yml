@@ -1,5 +1,5 @@
 mysql:
-    image: antoviaque/edx-mysql
+  image: antoviaque/edx-mysql
 edxapp:
   build: edxapp
   command: /sbin/my_init
@@ -7,3 +7,4 @@ edxapp:
     - "8000:8000"
   links:
     - mysql
+  tty: true
