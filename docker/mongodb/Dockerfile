@@ -6,6 +6,7 @@ FROM phusion/baseimage:0.9.15
 MAINTAINER Filip Jukić <filip@appsembler.com>
 
 ENV HOME /root
+ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update && apt-get -y install gcc python-dev python-apt python-setuptools git-core && easy_install pip && apt-get -y clean
 RUN git clone https://github.com/appsembler/configuration.git -b docker_multi_release ~/configuration
