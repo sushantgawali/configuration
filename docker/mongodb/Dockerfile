@@ -8,9 +8,10 @@ MAINTAINER Filip Jukić <filip@appsembler.com>
 ENV HOME /root
 
 RUN apt-get update && apt-get -y install gcc python-dev python-apt python-setuptools git-core && easy_install pip && apt-get -y clean
-ADD ../../ $HOME/configuration
-#RUN git clone https://github.com/appsembler/configuration.git -b docker_multi_release ~/configuration
-WORKDIR /configuration
+RUN git clone https://github.com/appsembler/configuration.git -b docker_multi_release ~/configuration
+# comment above command and uncomment below when the Dockerfile is in configuration root with the setup script
+#ADD . $HOME/configuration
+WORKDIR $HOME/configuration
 RUN pip install -r requirements.txt
 WORKDIR $HOME/configuration/playbooks
 ADD ./setup /root/
