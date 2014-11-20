@@ -307,7 +307,9 @@ EDXAPP_SUBDOMAIN_BRANDING: {}
 # EDXAPP_WORKERS:
 #   lms: <num workers>
 #   cms: <num workers>
-EDXAPP_WORKERS: !!null
+EDXAPP_WORKERS:
+  lms: 4
+  cms: 2
 EDXAPP_ANALYTICS_DATA_TOKEN: ""
 EDXAPP_ANALYTICS_DATA_URL: ""
 # Dashboard URL, assumes that the insights role is installed locally
