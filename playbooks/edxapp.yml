@@ -1,0 +1,15 @@
+- name: Deploy edxapp
+  hosts: all
+  sudo: True
+  gather_facts: True
+  roles:
+    - { role: 'docker', runit_service: 'mysql' }
+    - role: nginx
+      nginx_sites:
+      - lms
+      - cms
+      nginx_default_sites:
+      - lms
+    - edxapp
+    # run the docker scripts again to relink init.d scripts to runit
+    - { role: 'docker', tags: 'docker' }
