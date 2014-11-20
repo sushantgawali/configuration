@@ -6,4 +6,4 @@
   gather_facts: True
   roles:
     - { role: 'docker', runit_service: 'mysql' }
-    - mysql
+    - edxlocal
