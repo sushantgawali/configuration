@@ -5,5 +5,5 @@
   sudo: True
   gather_facts: True
   roles:
-    - { role: 'docker', runit_service: 'mongodb' }
+    - { role: 'docker', runit_service: 'mongodb', stop_services: true }
     - mongo

@@ -10,5 +10,5 @@
     - roles/ora/defaults/main.yml
     - roles/analytics-api/defaults/main.yml
   roles:
-    - { role: 'docker', runit_service: 'mysql' }
+    - { role: 'docker', runit_service: 'mysql', stop_services: true }
     - edxlocal

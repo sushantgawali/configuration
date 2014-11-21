@@ -35,3 +35,10 @@
   with_items: runit_{{version}}_services
   when: runit_service == item or runit_service == "all"
   tags: runit
+
+# Services run immediately after the init scripts are copied, stop them
+- name: Stop the services
+  service: name={{item}} state=stopped
+  with_items: runit_{{version}}_services
+  when: (runit_service == item or runit_service == "all") and stop_services == true
+  tags: runit
