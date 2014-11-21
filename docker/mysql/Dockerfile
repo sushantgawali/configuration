@@ -9,7 +9,7 @@ ENV HOME /root
 ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update && apt-get -y install gcc python-dev python-apt python-setuptools git-core && easy_install pip && apt-get -y clean
-RUN git clone https://github.com/appsembler/configuration.git -b docker_multi_release ~/configuration
+RUN git clone https://github.com/antoviaque/configuration.git -b docker_multi_release-edxapp /root/configuration
 ## comment above command and uncomment below when the Dockerfile is in configuration root with the setup script
 ##ADD . $HOME/configuration
 WORKDIR /root/configuration
