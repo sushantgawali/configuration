@@ -1,6 +1,6 @@
 ---
 - name: restart nginx
-  service: name=nginx state=restarted
+  file: path=/tmp/DISABLED state=touch
 
 - name: reload nginx
-  service: name=nginx state=reloaded
+  file: path=/tmp/DISABLED state=touch
