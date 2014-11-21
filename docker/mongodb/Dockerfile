@@ -12,6 +12,7 @@ RUN apt-get update && apt-get -y install gcc python-dev python-apt python-setupt
 RUN git clone https://github.com/appsembler/configuration.git -b docker_multi_release ~/configuration
 # comment above command and uncomment below when the Dockerfile is in configuration root with the setup script
 #ADD . $HOME/configuration
+ADD vars.yml /root/
 WORKDIR $HOME/configuration
 RUN pip install -r requirements.txt
 WORKDIR $HOME/configuration/playbooks
