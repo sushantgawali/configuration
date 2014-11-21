@@ -1,0 +1,16 @@
+- name: Deploy edxapp
+  hosts: all
+  sudo: True
+  gather_facts: True
+  roles:
+    - { role: 'docker', runit_service: 'nginx' }
+    - { role: 'docker', runit_service: 'supervisor' }
+    - role: nginx
+      nginx_sites:
+      - lms
+      - cms
+      nginx_default_sites:
+      - lms
+    - edxapp
+    - { role: 'docker', runit_service: 'nginx' }
+    - { role: 'docker', runit_service: 'supervisor' }

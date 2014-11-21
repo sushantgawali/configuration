@@ -19,14 +19,14 @@
     dest=/etc/mysql/my.cnf
 
 - name: make sure mysql has started
-  service: name=mysql state=restarted
+  service: name=mysql state=started
 
 - name: setup the edxapp db user
   mysql_user: >
     name={{ EDXAPP_MYSQL_USER }}
     password={{ EDXAPP_MYSQL_PASSWORD }}
     priv='{{EDXAPP_MYSQL_DB_NAME}}.*:ALL'
-    host={{MYSQL_USER_HOST}}
+    host='{{EDXAPP_MYSQL_USER_HOST}}'
   when: EDXAPP_MYSQL_USER is defined
 
 - name: create a database for edxapp
@@ -41,7 +41,7 @@
     name={{ XQUEUE_MYSQL_USER }}
     password={{ XQUEUE_MYSQL_PASSWORD }}
     priv='{{XQUEUE_MYSQL_DB_NAME}}.*:ALL'
-    host={{MYSQL_USER_HOST}}
+    host='{{EDXAPP_MYSQL_USER_HOST}}'
   when: XQUEUE_MYSQL_USER is defined
 
 - name: create a database for xqueue
@@ -56,7 +56,7 @@
     name={{ ORA_MYSQL_USER }}
     password={{ ORA_MYSQL_PASSWORD }}
     priv='{{ORA_MYSQL_DB_NAME}}.*:ALL'
-    host={{MYSQL_USER_HOST}}
+    host='{{EDXAPP_MYSQL_USER_HOST}}'
   when: ORA_MYSQL_USER is defined
 
 - name: create a database for ora
@@ -82,7 +82,7 @@
     name=api001
     password=password
     priv='{{ ANALYTICS_API_CONFIG['DATABASES']['default']['NAME'] }}.*:ALL/reports.*:SELECT'
-    host={{MYSQL_USER_HOST}}
+    host='{{EDXAPP_MYSQL_USER_HOST}}'
   when: ANALYTICS_API_CONFIG is defined
 
 - name: create read-only reports user for the analytics-api
@@ -90,7 +90,7 @@
     name=reports001
     password=password
     priv='{{ ANALYTICS_API_CONFIG['DATABASES']['reports']['NAME'] }}.*:SELECT'
-    host={{MYSQL_USER_HOST}}
+    host='{{EDXAPP_MYSQL_USER_HOST}}'
   when: ANALYTICS_API_CONFIG is defined
 
 - name: setup the migration db user
@@ -98,8 +98,8 @@
     name={{ COMMON_MYSQL_MIGRATE_USER }}
     password={{ COMMON_MYSQL_MIGRATE_PASS }}
     priv='{{ item }}.*:ALL'
-    host={{MYSQL_USER_HOST}}
     append_privs=yes
+    host='{{EDXAPP_MYSQL_USER_HOST}}'
   when: item != 'None'
   with_items:
     - "{{ EDXAPP_MYSQL_DB_NAME|default('None') }}"
@@ -111,8 +111,8 @@
     name={{ COMMON_MYSQL_MIGRATE_USER }}
     password={{ COMMON_MYSQL_MIGRATE_PASS }}
     priv='{{ item }}.*:ALL'
-    host={{MYSQL_USER_HOST}}
     append_privs=yes
+    host='{{EDXAPP_MYSQL_USER_HOST}}'
   when: ANALYTICS_API_CONFIG is defined
   with_items:
     - "{{ ANALYTICS_API_CONFIG['DATABASES']['default']['NAME'] }}"
@@ -124,14 +124,14 @@
     name={{ COMMON_MYSQL_READ_ONLY_USER }}
     password={{ COMMON_MYSQL_READ_ONLY_PASS }}
     priv='*.*:ALL'
-    host={{MYSQL_USER_HOST}}
+    host='{{EDXAPP_MYSQL_USER_HOST}}'
 
 - name: setup the admin db user
   mysql_user: >
     name={{ COMMON_MYSQL_ADMIN_USER }}
     password={{ COMMON_MYSQL_ADMIN_PASS }}
     priv='*.*:CREATE USER'
-    host={{MYSQL_USER_HOST}}
+    host='{{EDXAPP_MYSQL_USER_HOST}}'
 
 
 - name: install memcached

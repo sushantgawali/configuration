@@ -1,0 +1,9 @@
+mysql:
+  image: appsembler/edx-mysql
+edxapp:
+  image: appsembler/edxapp
+  ports:
+    - "8000:8000"
+  links:
+    - mysql
+  tty: true
