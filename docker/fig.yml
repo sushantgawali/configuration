@@ -1,9 +1,13 @@
 mysql:
   image: antoviaque/edx-mysql
+mongodb:
+  image: antoviaque/edx-mongodb
 edxapp:
   image: antoviaque/edxapp
+  command: /root/init.sh
   ports:
     - "8000:8000"
   links:
     - mysql
+    - mongodb
   tty: true
