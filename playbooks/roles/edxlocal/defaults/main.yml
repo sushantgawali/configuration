@@ -3,3 +3,5 @@ edxlocal_debian_pkgs:
   - python-mysqldb
   - mysql-server-5.5
   - postfix
+
+EDXAPP_MYSQL_USER_HOST: 'localhost'
