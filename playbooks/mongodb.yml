@@ -6,6 +6,7 @@
   gather_facts: True
   vars:
     MONGO_BIND_IP: 0.0.0.0
+    mongo_create_users: True
   roles:
     - { role: 'docker', runit_service: 'mongodb', stop_services: true }
     - mongo
