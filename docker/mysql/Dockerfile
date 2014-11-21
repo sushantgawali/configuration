@@ -12,6 +12,7 @@ RUN apt-get update && apt-get -y install gcc python-dev python-apt python-setupt
 RUN git clone https://github.com/antoviaque/configuration.git -b docker_multi_release-edxapp /root/configuration
 ## comment above command and uncomment below when the Dockerfile is in configuration root with the setup script
 ##ADD . $HOME/configuration
+ADD vars.yml /root/
 WORKDIR /root/configuration
 RUN pip install -r requirements.txt
 WORKDIR /root/configuration/playbooks
