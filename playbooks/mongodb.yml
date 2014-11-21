@@ -4,6 +4,8 @@
   hosts: all
   sudo: True
   gather_facts: True
+  vars:
+    mongo_bind_ip: 0.0.0.0
   roles:
     - { role: 'docker', runit_service: 'mongodb' }
     - mongo
