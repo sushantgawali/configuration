@@ -20,7 +20,6 @@ RUN chmod 777 /root/setup
 RUN /root/setup && apt-get clean
 
 EXPOSE 27017 28017
-VOLUME ["/data/db"]
-WORKDIR /data
+VOLUME ["/edx/var/mongo/mongodb"]
 
 CMD ["/sbin/my_init", "--enable-insecure-key"]
