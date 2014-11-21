@@ -4,6 +4,7 @@
   gather_facts: True
   roles:
     - { role: 'docker', runit_service: 'supervisor' }
+    - { role: 'docker', runit_service: 'memcached' }
     - role: nginx
       nginx_sites:
       - lms
@@ -12,3 +13,4 @@
       - lms
     - edxapp
     - { role: 'docker', runit_service: 'supervisor' }
+    - { role: 'docker', runit_service: 'memcached' }
