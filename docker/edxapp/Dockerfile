@@ -12,7 +12,7 @@ RUN pip install -r requirements.txt
 WORKDIR /var/tmp/configuration/playbooks
 ADD ./setup /root/
 RUN chmod 777 /root/setup
-#RUN PYTHONUNBUFFERED=1 /root/setup && apt-get clean
+RUN PYTHONUNBUFFERED=1 /root/setup && apt-get clean
 
 EXPOSE 8000 18010
 

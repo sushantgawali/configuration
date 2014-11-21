@@ -1,8 +1,7 @@
 mysql:
   image: antoviaque/edx-mysql
 edxapp:
-  build: edxapp
-  command: /sbin/my_init
+  image: antoviaque/edxapp
   ports:
     - "8000:8000"
   links:

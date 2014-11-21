@@ -12,3 +12,4 @@
   roles:
     - { role: 'docker', runit_service: 'mysql' }
     - edxlocal
+    - { role: 'docker', runit_service: 'mysql' }
