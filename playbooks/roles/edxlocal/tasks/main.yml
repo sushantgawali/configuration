@@ -128,3 +128,8 @@
     src=memcached.conf
     dest=/etc/memcached.conf
 
+- name: copy mysql config
+  copy:
+    src=my.cnf
+    dest=/etc/mysql/my.cnf
+
