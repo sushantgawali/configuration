@@ -4,5 +4,4 @@ edxlocal_debian_pkgs:
   - mysql-server-5.5
   - postfix
 
-EDXLOCAL_MYSQL_USER_HOST: 'localhost'
-EDXLOCAL_MYSQL_BIND_IP: 127.0.0.1
+EDXAPP_MYSQL_USER_HOST: 'localhost'

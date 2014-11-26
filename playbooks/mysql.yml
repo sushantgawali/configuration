@@ -9,10 +9,7 @@
     - roles/xqueue/defaults/main.yml
     - roles/ora/defaults/main.yml
     - roles/analytics-api/defaults/main.yml
-  vars:
-    MYSQL_BIND_IP: 0.0.0.0
-    MYSQL_USER_HOST: '%'
   roles:
-    - { role: 'docker', runit_service: 'mysql', stop_services: true }
+    - { role: 'docker', runit_service: 'mysql' }
     - edxlocal
-    - { role: 'docker', runit_service: 'mysql', stop_services: false }
+    - { role: 'docker', runit_service: 'mysql' }
