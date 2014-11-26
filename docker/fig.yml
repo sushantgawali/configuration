@@ -1,9 +1,13 @@
 mysql:
   image: appsembler/edx-mysql
+mongodb:
+  image: appsembler/edx-mongodb
 edxapp:
   image: appsembler/edxapp
+  command: /root/init.sh
   ports:
     - "8000:8000"
   links:
     - mysql
+    - mongodb
   tty: true

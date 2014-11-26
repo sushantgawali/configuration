@@ -3,8 +3,8 @@
   sudo: True
   gather_facts: True
   roles:
-    - { role: 'docker', runit_service: 'nginx' }
     - { role: 'docker', runit_service: 'supervisor' }
+    - { role: 'docker', runit_service: 'memcached' }
     - role: nginx
       nginx_sites:
       - lms
@@ -12,5 +12,5 @@
       nginx_default_sites:
       - lms
     - edxapp
-    - { role: 'docker', runit_service: 'nginx' }
     - { role: 'docker', runit_service: 'supervisor' }
+    - { role: 'docker', runit_service: 'memcached' }
