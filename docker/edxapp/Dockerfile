@@ -12,6 +12,7 @@ WORKDIR /var/tmp/configuration
 RUN pip install -r requirements.txt
 WORKDIR /var/tmp/configuration/playbooks
 ADD ./setup /root/
+ADD ./init.sh /root/
 RUN chmod 777 /root/setup
 RUN PYTHONUNBUFFERED=1 /root/setup && apt-get clean
 
