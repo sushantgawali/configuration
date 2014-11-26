@@ -16,6 +16,6 @@ ADD ./init.sh /root/
 RUN chmod 777 /root/setup
 RUN PYTHONUNBUFFERED=1 /root/setup && apt-get clean
 
-EXPOSE 8000 18010
+EXPOSE 80 18010 18020
 
 CMD ["/sbin/my_init", "--enable-insecure-key"]
