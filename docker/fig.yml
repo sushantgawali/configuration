@@ -10,6 +10,6 @@ edxapp:
     - 18010
     - 18020
   links:
-    - mysql
-    - mongodb
+    - mysql:db
+    - mongodb:mongo
   tty: true
