@@ -13,6 +13,7 @@
     edx_platform_version: 'docker_release'
   roles:
     - { role: 'docker', version: 'solo', runit_service: 'supervisor' }
+    - { role: 'docker', version: 'solo', runit_service: 'nginx' }
     - role: nginx
       nginx_sites:
       - lms
@@ -20,4 +21,5 @@
       nginx_default_sites:
       - lms
     - edxapp
+    - { role: 'docker', version: 'solo', runit_service: 'nginx' }
     - { role: 'docker', version: 'solo', runit_service: 'supervisor' }
