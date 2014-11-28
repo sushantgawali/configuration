@@ -5,6 +5,9 @@
 FROM phusion/baseimage:0.9.15
 MAINTAINER Filip Jukić <filip@appsembler.com>
 
+ENV HOME /root
+ENV PYTHONUNBUFFERED 1
+
 RUN apt-get update && apt-get -y install gcc python-dev python-apt python-setuptools git-core && easy_install pip && apt-get -y clean
 RUN git clone https://github.com/appsembler/configuration.git -b docker_multi_release /var/tmp/configuration
 ADD vars.yml /root/
@@ -14,7 +17,7 @@ WORKDIR /var/tmp/configuration/playbooks
 ADD ./setup /root/
 ADD ./init.sh /root/
 RUN chmod 777 /root/setup
-RUN PYTHONUNBUFFERED=1 /root/setup && apt-get clean
+RUN /root/setup && apt-get clean
 
 EXPOSE 80 18010 18020
 
