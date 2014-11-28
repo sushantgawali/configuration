@@ -6,7 +6,9 @@ edxapp:
   build: edxapp
   command: /root/init.sh
   ports:
-    - "8000:8000"
+    - 80
+    - 18010
+    - 18020
   links:
     - mysql
     - mongodb
