@@ -6,6 +6,6 @@ EDXAPP_MONGO_HOSTS: ['mongodb']
 EDXAPP_MONGO_PORT: 27017
 EDXAPP_MONGO_DB_NAME: 'docker-edxapp'
 EDXAPP_MONGO_USER: 'edxapp'
-EDXAPP_MONGO_PASSWORD: 'daheiYae2c'
+EDXAPP_MONGO_PASSWORD: 'password'
 MONGO_BIND_IP: '0.0.0.0'
 mongo_create_users: true
