@@ -1,14 +1,22 @@
 #!/bin/sh
 set -e
 # declare service dependencies
+{% if version == "full" %}
 sv start memcached || exit 1
 sv start elasticsearch || exit 1
 sv start mysql || exit 1
-{% if version == "full" %}
 sv start redis-server || exit 1
 sv start rabbitmq-server || exit 1
-{% endif %}
 sv start supervisor.devpi || exit 1
 sv start mongodb || exit 1
+{% elif version == "lite" %}
+sv start memcached || exit 1
+sv start elasticsearch || exit 1
+sv start mysql || exit 1
+sv start supervisor.devpi || exit 1
+sv start mongodb || exit 1
+{% elif version == "solo" %}
+sv start supervisor.devpi || exit 1
+{% endif %}
 exec /sbin/setuser www-data /edx/app/supervisor/venvs/supervisor/bin/supervisord -c /edx/app/supervisor/supervisord.conf
 
