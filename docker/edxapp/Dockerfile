@@ -21,4 +21,4 @@ RUN /root/setup && apt-get clean
 
 EXPOSE 80 18010 18020
 
-CMD ["/sbin/my_init", "--enable-insecure-key"]
+CMD ["/root/init.sh"]
