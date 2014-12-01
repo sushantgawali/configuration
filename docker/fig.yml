@@ -1,9 +1,9 @@
 mysql:
-  image: appsembler/edx-mysql
+  image: appsembler/edx-multi-mysql
 mongodb:
-  image: appsembler/edx-mongodb
+  image: appsembler/edx-multi-mongodb
 edxapp:
-  image: appsembler/edxapp
+  image: appsembler/edx-multi-edxapp
   command: /root/init.sh
   ports:
     - 80
