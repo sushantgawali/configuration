@@ -27,3 +27,4 @@ runit_full_services_stop:
   - rabbitmq-server
 
 version: full
+supervisor_version: full
