@@ -19,7 +19,8 @@ CONF_DIR=/etc/$NAME
 CONF_FILE=$CONF_DIR/elasticsearch.yml
 MAX_MAP_COUNT=262144
 MAX_OPEN_FILES=65535
-ulimit -n $MAX_OPEN_FILES
+# don't fail if setting ulimit is not allowed
+ulimit -n $MAX_OPEN_FILES || true
 
 # ElasticSearch data directory
 DATA_DIR=/var/lib/$NAME
