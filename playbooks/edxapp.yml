@@ -13,6 +13,7 @@
     edx_platform_version: 'docker_release'
   roles:
     - { role: 'docker', runit_service: 'supervisor', supervisor_version: 'solo' }
+    - { role: 'docker', runit_service: 'supervisor.devpi' }
     - { role: 'docker', runit_service: 'nginx' }
     - role: nginx
       nginx_sites:
