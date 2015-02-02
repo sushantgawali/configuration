@@ -6,4 +6,5 @@
   gather_facts: True
   roles:
     - { role: 'docker', runit_service: 'mongodb', stop_services: true }
-    - mongo
+    - { role: 'mongo', mongo_create_users: true }
+
