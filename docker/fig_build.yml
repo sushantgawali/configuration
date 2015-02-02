@@ -2,6 +2,10 @@ mysql:
   build: mysql
 mongodb:
   build: mongodb
+forum:
+  build: forum
+  links:
+    - mongodb:mongo
 edxapp:
   build: edxapp
   command: /root/init.sh
@@ -11,5 +15,6 @@ edxapp:
     - 18020
   links:
     - mysql
-    - mongodb
+    - mongodb:mongo
+    - forum
   tty: true

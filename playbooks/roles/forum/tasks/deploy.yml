@@ -7,6 +7,7 @@
     group={{ supervisor_user }}
     mode=0644
   sudo_user: "{{ supervisor_user }}"
+  when: not skip_supervisor
   register: forum_supervisor
 
 - name: enable the supervisor config
@@ -27,6 +28,7 @@
     dest={{ forum_supervisor_wrapper }}
     mode=0755
   sudo_user: "{{ forum_user }}"
+  when: not skip_supervisor
   notify: restart the forum service
 
 - name:  git checkout forum repo into {{ forum_code_dir }}
@@ -65,7 +67,8 @@
     state=started
   when: not disable_edx_services
 
-- include: test.yml tags=deploy
+# Doesn't work during build (links are not in place)
+#- include: test.yml tags=deploy
 
 - include: tag_ec2.yml tags=deploy
   when: COMMON_TAG_EC2_INSTANCE

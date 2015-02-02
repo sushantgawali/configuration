@@ -10,6 +10,7 @@ runit_lite_services:
 
 runit_full_services:
   - elasticsearch
+  - forum
   - memcached
   - mongodb
   - mysql
