@@ -23,6 +23,7 @@ EDXAPP_FEATURES:
 #  USE_MICROSITES: True
   USE_CUSTOM_THEME: True
   PREVIEW_LMS_BASE: "preview.example.com" #use instead of EDXAPP_PREVIEW_LMS_BASE
+  ENABLE_CREATOR_GROUP: True
 
 # ENABLE_INSTRUCTOR_ANALYTICS
 # Analytics experiments - shows instructor analytics tab in LMS instructor dashboard.
