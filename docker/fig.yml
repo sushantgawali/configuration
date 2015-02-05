@@ -2,6 +2,10 @@ mysql:
   image: appsembler/edx-multi-mysql
 mongodb:
   image: appsembler/edx-multi-mongodb
+forum:
+  image: appsembler/edx-multi-forum
+  links:
+    - mongodb:mongo
 edxapp:
   image: appsembler/edx-multi-edxapp
   command: /root/init.sh
@@ -12,4 +16,5 @@ edxapp:
   links:
     - mysql:db
     - mongodb:mongo
+    - forum
   tty: true

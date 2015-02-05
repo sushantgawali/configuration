@@ -2,10 +2,14 @@ EDXAPP_PLATFORM_NAME: 'Docker'
 EDXAPP_LMS_NGINX_PORT: 80
 
 # Mongo DB
-EDXAPP_MONGO_HOSTS: ['mongodb']
-EDXAPP_MONGO_PORT: 27017
-EDXAPP_MONGO_DB_NAME: 'docker-edxapp'
-EDXAPP_MONGO_USER: 'edxapp'
-EDXAPP_MONGO_PASSWORD: 'password'
 MONGO_BIND_IP: '0.0.0.0'
 mongo_create_users: true
+
+MONGO_USERS:
+  - user: 'cs_comments_service'
+    password: 'NeepahGh9V'
+    database: 'cs_comments_service'
+  - user: 'edxapp'
+    password: 'daheiYae2c'
+    database: 'docker-edxapp'
+

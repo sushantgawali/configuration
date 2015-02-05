@@ -1,6 +1,5 @@
 ---
 dependencies:
-  - supervisor
   - role: rbenv
     # TODO: setting the rbenv ownership to
     # the common_web_user is a workaround
