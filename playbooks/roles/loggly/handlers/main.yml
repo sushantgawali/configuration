@@ -14,5 +14,6 @@
 # Overview:
 # 
 #
-- name: notify me
-  debug: msg="stub handler"
+- name: restart rsyslog
+  service: name=rsyslog state=restarted
+  sudo: yes

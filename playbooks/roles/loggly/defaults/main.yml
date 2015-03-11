@@ -7,13 +7,15 @@
 # code style: https://github.com/edx/configuration/wiki/Ansible-Coding-Conventions
 # license:    https://github.com/edx/configuration/blob/master/LICENSE.TXT
 #
-##
-# Defaults for role loggly
-# 
 
-#
-# vars are namespace with the module name.
-#
+#TODO add ec2 keys for s3 if we want to archive logs (paid plan)
+LOGGLY_ACCOUNT_NAME: "default_account_name"
+LOGGLY_TOKEN: "default_token"
+LOGGLY_USERNAME: "default_username"
+#LOGGLY_PASSWORD: "default_pass"
+LOGGLY_APP_NAME: "{{COMMON_ENVIRONMENT}}--{{COMMON_DEPLOYMENT}}"
+LOGGLY_APP_PATH: "/tmp/app/path"
+
 loggly_role_name: loggly
 
 #

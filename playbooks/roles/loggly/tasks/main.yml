@@ -21,6 +21,22 @@
 #
 #
 
-- name: stub ansible task
-  debug: msg="This is a stub task created by the ansible-role role"
-  notify: notify me
+- name: Download config script from loggly.com
+  get_url: url=https://www.loggly.com/install/configure-linux.sh dest=/tmp/configure-linux.sh
+
+- name: Configure Loggly
+  shell: sudo /bin/bash /tmp/configure-linux.sh -a {{ LOGGLY_ACCOUNT_NAME }} -t {{ LOGGLY_TOKEN }} -u {{ LOGGLY_USERNAME }} 
+  sudo: yes
+
+- name: copy app conf file
+  template: src=21-app-loggly.conf.j2 dest=/etc/rsyslog.d/21-{{ item.log_name }}-loggly.conf owner=root group=root force=yes
+  with_items:
+    - { log_name: {{ app_name }} }
+    - { log_name: express }
+  sudo: yes
+  notify:
+    - restart rsyslog
+
+## probably not necessary
+#- name: Send test log to Loggly
+#  shell: logger 'Hello World!'
