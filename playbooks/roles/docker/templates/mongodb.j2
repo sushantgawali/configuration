@@ -6,5 +6,5 @@ ulimit -v unlimited
 # don't fail if setting ulimit is not allowed
 ulimit -n 64000 || true
 ulimit -m unlimited
-exec /sbin/setuser mongodb /usr/bin/mongod --config /etc/mongodb.conf
+exec /sbin/setuser mongodb /usr/bin/mongod --config /etc/mongod.conf
 
