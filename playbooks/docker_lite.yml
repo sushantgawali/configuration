@@ -21,8 +21,19 @@
     # used for releases
     edx_platform_version: 'appsembler_docker/feature/birchMerge'
     forum_version: 'named-release/birch'
+    #birch changes
+    EDXAPP_PYTHON_SANDBOX: false
+    EDXAPP_SANDBOX_ENFORCE: false
+    EDXAPP_LMS_ENV: 'lms.envs.docker'
+    EDXAPP_CMS_ENV: 'cms.envs.docker'
+    APP_WORKERS:
+      lms: 4
+      cms: 2
+    worker_core_mult:
+      lms: 1
+      cms: 1
   roles:
-    - edx_ansible
+    #- edx_ansible
     - { role: 'docker', version: 'lite', tags: 'runit' }
     - role: nginx
       nginx_sites:
@@ -33,7 +44,7 @@
       nginx_default_sites:
       - lms
     - edxlocal
-    - mongo
+    - { role: 'mongo', mongo_update_users: True }
     - edxapp
     - oraclejdk
     - elasticsearch
@@ -45,6 +56,6 @@
     - role: splunkforwarder
       when: COMMON_ENABLE_SPLUNKFORWARDER
     - role: newrelic
-      when: COMMON_ENABLE_NEWRELIC
     # run the docker scripts again to relink init.d scripts to runit
     - { role: 'docker', version: 'lite', tags: 'runit' }
+
