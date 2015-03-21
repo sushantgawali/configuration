@@ -17,8 +17,10 @@
     # These should stay false for the public AMI
     COMMON_ENABLE_DATADOG: False
     COMMON_ENABLE_SPLUNKFORWARDER: False
+    edx_ansible_source_repo: "https://github.com/appsembler/configuration"
     OPENEDX_RELEASE: 'appsembler_docker/feature/birchMerge'
     # used for releases
+    edx_platform_repo: "https://github.com/appsembler/edx-platform.git"
     edx_platform_version: 'appsembler_docker/feature/birchMerge'
     forum_version: 'named-release/birch'
     #birch changes
