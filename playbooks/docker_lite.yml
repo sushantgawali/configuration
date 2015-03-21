@@ -33,7 +33,7 @@
       lms: 1
       cms: 1
   roles:
-    #- edx_ansible
+    - edx_ansible
     - { role: 'docker', version: 'lite', tags: 'runit' }
     - role: nginx
       nginx_sites:
@@ -44,7 +44,7 @@
       nginx_default_sites:
       - lms
     - edxlocal
-    - { role: 'mongo', mongo_update_users: True }
+    - mongo
     - edxapp
     - oraclejdk
     - elasticsearch
