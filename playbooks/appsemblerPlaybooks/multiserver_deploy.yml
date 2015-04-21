@@ -4,6 +4,13 @@
 # for single server community
 # installs
 
+- name: Configure mongo
+  hosts: "mit-mongo"
+  sudo: True
+  gather_facts: True
+  roles:
+  - mongo
+
 - name: Configure instance(s)
   hosts: "mit-edx"
   sudo: True
@@ -48,9 +55,3 @@
     - role: newrelic
       when: COMMON_ENABLE_NEWRELIC
 
-- name: Configure mongo
-  hosts: "mit-mongo"
-  sudo: True
-  gather_facts: True
-  roles:
-  - mongo
