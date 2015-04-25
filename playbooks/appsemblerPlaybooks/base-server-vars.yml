@@ -1,0 +1,201 @@
+---
+# See all the settings in https://github.com/edx/configuration/blob/master/playbooks/roles/edxapp/defaults/main.yml
+
+EDXAPP_PLATFORM_NAME: "Site Name"
+COMMON_ENVIRONMENT: "default-env"
+COMMON_DEPLOYMENT: "default-staging"
+
+## Additional requirements
+#custom_requirements_file: "{{ edxapp_app_dir }}/custom_requirements.txt"
+#EDXAPP_ADDL_INSTALLED_APPS:
+#  - mentoring
+#  - edx_sga
+#  - edx_microsite_manager
+
+EDXAPP_FEATURES:
+  ALLOW_ALL_ADVANCED_COMPONENTS: true
+  ENABLE_SYSADMIN_DASHBOARD: True
+#  RESTRICT_ENROLL_BY_REG_METHOD: False
+#  ENABLE_INSTRUCTOR_ANALYTICS: False
+#  SEGMENT_IO_LMS: False
+#  ENABLE_SERVICE_STATUS: False #Enable URL that shows information about the status of variuous services
+#  ENABLE_CHAT: True
+#  USE_MICROSITES: True
+  USE_CUSTOM_THEME: True
+  PREVIEW_LMS_BASE: "preview.example.com" #use instead of EDXAPP_PREVIEW_LMS_BASE
+  ENABLE_CREATOR_GROUP: True
+
+# ENABLE_INSTRUCTOR_ANALYTICS
+# Analytics experiments - shows instructor analytics tab in LMS instructor dashboard.
+# Enabling this feature depends on installation of a separate analytics server.
+
+# Enable Google Analytics (only if not using a custom theme)
+#EDXAPP_GOOGLE_ANALYTICS_ACCOUNT: "UA-549xxx-x"
+
+## github.com account names / repo owners:
+#OPEN_EDX: "edx"    # Open edX repos
+#GIT_ACCT: appsembler  # your github acct (your development repos), or edx
+#THEME_ACCT: "ISCLC" # Theme repos
+#COMMON_GIT_MIRROR: "github.com"
+
+## if using a private git repo
+#EDXAPP_GIT_IDENTITY: |
+# -----BEGIN RSA PRIVATE KEY-----
+# ...
+# -----END RSA PRIVATE KEY-----
+#EDXAPP_USE_GIT_IDENTITY: true
+
+## edx-platform repo and version
+edx_platform_repo: "https://github.com/appsembler/edx-platform.git"
+edx_platform_version: "appsembler/release"
+edx_ansible_source_repo: "https://github.com/appsembler/configuration"
+configuration_version: "appsembler/release"
+
+## Theme
+edxapp_use_custom_theme: true  # false to disable & use std. theme
+edxapp_theme_name: "default"
+edxapp_theme_source_repo: "https://github.com/appsembler/edx-theme.git"
+edxapp_theme_version: "default" #branch
+
+## NGINX Config
+#NGINX_ENABLE_SSL: true
+#NGINX_SSL_CERTIFICATE: "/edx/app/certs/ssl/STAR.example.com-bundle.crt" 
+#NGINX_SSL_KEY: "/edx/app/certs/ssl/STAR.example.com.key"
+NGINX_SET_X_FORWARDED_HEADERS: True #set to True if not behind load balancer
+EDXAPP_LMS_NGINX_PORT: 80
+EDXAPP_LMS_SSL_NGINX_PORT: 443
+EDXAPP_LMS_PREVIEW_NGINX_PORT: 80
+EDXAPP_CMS_NGINX_PORT: 80
+EDXAPP_CMS_SSL_NGINX_PORT: 443
+CMS_HOSTNAME: '~^((stage|prod)-)?studio.*' #for redirect within nginx
+
+nginx_sites:
+  - cms
+  - lms
+  - forum
+  - ora
+  - xqueue
+nginx_default_sites:
+  - lms
+#COMMON_HTPASSWD_USER: "user"
+#COMMON_HTPASSWD_PASS: "password"
+COMMON_ENABLE_BASIC_AUTH: False
+
+
+## Base
+EDXAPP_LMS_BASE: "example.com"
+EDXAPP_PREVIEW_LMS_BASE: "preview.example.com"
+EDXAPP_CMS_BASE: "studio.example.com"
+
+## Site names
+EDXAPP_SITE_NAME: "example.com"
+EDXAPP_LMS_SITE_NAME: "example.com"
+EDXAPP_CMS_SITE_NAME: "studio.example.com"
+
+## Social media
+EDXAPP_PLATFORM_FACEBOOK_ACCOUNT: "http://www.facebook.com/accountName"
+EDXAPP_PLATFORM_TWITTER_ACCOUNT: "@twitterHandle"
+
+## Analytics
+#EDXAPP_SEGMENT_IO_LMS: true
+#EDXAPP_ANALYTICS_SERVER_URL: 
+
+## Email addresses
+EDXAPP_CONTACT_EMAIL: "customerservice@example.com"
+EDXAPP_DEFAULT_FEEDBACK_EMAIL: "customerservice@example.com"
+EDXAPP_DEFAULT_FROM_EMAIL: "customerservice@example.com"
+EDXAPP_BUGS_EMAIL: "bugs@appsembler.com"
+EDXAPP_BULK_EMAIL_DEFAULT_FROM_EMAIL: "customerservice@example.com"
+EDXAPP_PAYMENT_SUPPORT_EMAIL: "customerservice@example.com"
+EDXAPP_PRESS_EMAIL: "customerservice@example.com"
+EDXAPP_SERVER_EMAIL: "devops@appsembler.com"
+EDXAPP_TECH_SUPPORT_EMAIL: "technical@appsembler.com"
+EDXAPP_FEEDBACK_SUBMISSION_EMAIL: "customerservice@example.com"
+EDXAPP_UNIVERSITY_EMAIL: "customerservice@example.com"
+
+## Email backend
+EDXAPP_EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
+#EDXAPP_EMAIL_BACKEND: "django_ses.SESBackend"
+#EDXAPP_EMAIL_HOST: "email-smtp.us-..."
+#EDXAPP_EMAIL_PORT: 25
+#EDXAPP_EMAIL_HOST_USER: "xxxxxx"
+#EDXAPP_EMAIL_HOST_PASSWORD: "xxxxx"
+#EDXAPP_EMAIL_USE_TLS: true
+
+## Multilingual
+EDXAPP_LANGUAGE_CODE: "en"
+
+## Logging
+EDXAPP_LOG_LEVEL: "INFO"
+EDXAPP_LOCAL_LOGLEVEL: "INFO"
+EDXAPP_LOGGING_ENV: "sandbox"
+EDXAPP_LOG_DIR: "/edx/var/logs/edx"
+EDXAPP_SYSLOG_SERVER: ""
+
+## Microsites
+#EDXAPP_MICROSITE_ROOT_DIR: "/edx/app/edxapp/edx-microsite"
+#EDXAPP_MICROSITE_CONFIGURATION: {
+#    "default": {
+#        "course_about_show_social_links": false,
+#        "logo_image_url": "default/images/intersystems-logo.png"
+#    }
+#}
+## Marketing
+#EDXAPP_MKTG_URLS: {}
+#EDXAPP_MKTG_URL_LINK_MAP: {}
+
+## Registration form fields
+EDXAPP_ENV_EXTRA:
+  REGISTRATION_EXTRA_FIELDS: {
+    'level_of_education': 'hidden',
+    'gender': 'hidden',
+    'year_of_birth': 'hidden',
+    'mailing_address': 'hidden',
+    'goals': 'required',
+    'honor_code': 'hidden',
+    'city': 'hidden',
+    'country': 'hidden',
+  }
+
+# AWS S3 configuration
+EDXAPP_AWS_ACCESS_KEY_ID: "xxxxx"
+EDXAPP_AWS_SECRET_ACCESS_KEY: "xxxxx"
+#EDXAPP_AWS_STORAGE_BUCKET_NAME: "bucket-edxuploads"
+
+# Setting up New Relic
+COMMON_ENABLE_NEWRELIC: True
+COMMON_ENABLE_NEWRELIC_APP: True
+NEWRELIC_LICENSE_KEY: "xxxxx"
+NEWRELIC_APP_NAME: "NR_APP_NAME"
+
+# gunicorn workers
+EDXAPP_WORKERS:
+  lms: 5
+  cms: 1
+
+# celery workers
+EDXAPP_BROKER_HEARTBEAT: 0
+
+EDXAPP_CELERY_WORKERS:
+  - queue: low
+    service_variant: cms
+    concurrency: 1
+  - queue: default
+    service_variant: cms
+    concurrency: 1
+  - queue: high
+    service_variant: cms
+    concurrency: 1
+  - queue: low
+    service_variant: lms
+    concurrency: 1
+  - queue: default
+    service_variant: lms
+    concurrency: 1
+  - queue: high
+    service_variant: lms
+    concurrency: 1
+  - queue: high_mem
+    service_variant: lms
+    concurrency: 1
+
