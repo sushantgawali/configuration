@@ -5,6 +5,7 @@
   sudo: True
   gather_facts: True
   roles:
+    - common
     - oraclejdk
     - elasticsearch
     - { role: 'docker', runit_service: 'elasticsearch' }
