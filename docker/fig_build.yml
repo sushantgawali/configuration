@@ -14,7 +14,7 @@ edxapp:
     - 18010
     - 18020
   links:
-    - mysql
+    - mysql:db
     - mongodb:mongo
     - forum
   tty: true
