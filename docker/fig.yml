@@ -1,3 +1,5 @@
+elasticsearch:
+  image: appsembler/edx-multi-elasticsearch
 mysql:
   image: appsembler/edx-multi-mysql
 mongodb:
@@ -6,6 +8,7 @@ forum:
   image: appsembler/edx-multi-forum
   links:
     - mongodb:mongo
+    - elasticsearch
 edxapp:
   image: appsembler/edx-multi-edxapp
   command: /root/init.sh
