@@ -1,6 +1,1 @@
 EDXAPP_PLATFORM_NAME: 'Docker'
-
-#COMMON_APP_DIR: '/edx/var'
-#COMMON_DATA_DIR: '/edx/var'
-#COMMON_LOG_DIR: '/edx/var'
-#COMMON_CFG_DIR: '/edx/var'
