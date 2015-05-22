@@ -1,0 +1,23 @@
+---
+
+# appsembler hackday part 2 (5/22/15)
+
+- name: Install EKL
+  hosts: all
+  sudo: True
+  gather_facts: True
+  vars:
+    KIBANA_SERVER_NAME: localhost
+    NGINX_ENABLE_SSL: false
+  roles:
+    - oraclejdk
+	- elasticsearch
+    - logstash
+    - kibana
+	- role: nginx
+	  nginx_sites:
+	  -kibana
+	  nginx_default_sites:
+	  -kibana
+
+
