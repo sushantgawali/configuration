@@ -1,3 +1,5 @@
+elasticsearch:
+  build: elasticsearch
 mysql:
   build: mysql
 mongodb:
@@ -6,6 +8,7 @@ forum:
   build: forum
   links:
     - mongodb:mongo
+    - elasticsearch
 edxapp:
   build: edxapp
   command: /root/init.sh
@@ -14,7 +17,7 @@ edxapp:
     - 18010
     - 18020
   links:
-    - mysql
+    - mysql:db
     - mongodb:mongo
     - forum
   tty: true

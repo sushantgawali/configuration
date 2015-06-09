@@ -6,12 +6,10 @@
   gather_facts: True
   roles:
     - oraclejdk
-    - elasticsearch
     - { role: 'forum', disable_edx_services: true, skip_supervisor: true }
     - role: nginx
       nginx_sites:
       - forum
 
-    - { role: 'docker', runit_service: 'elasticsearch' }
     - { role: 'docker', runit_service: 'forum' }
     - { role: 'docker', runit_service: 'nginx' }

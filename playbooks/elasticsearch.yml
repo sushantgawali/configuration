@@ -1,0 +1,11 @@
+---
+
+- name: Configure instance(s)
+  hosts: all
+  sudo: True
+  gather_facts: True
+  roles:
+    - common
+    - oraclejdk
+    - elasticsearch
+    - { role: 'docker', runit_service: 'elasticsearch' }

@@ -34,6 +34,7 @@
     url={{ elasticsearch_url }}
     dest=/var/tmp/{{ elasticsearch_file }}
     force=no
+    validate_certs=no
   register: elasticsearch_reinstall
 
 - name: install elasticsearch from local package
@@ -76,12 +77,13 @@
 - name: check if the bigdesk plugin is installed
   stat: path=/usr/share/elasticsearch/plugins/bigdesk
   register: bigdesk
-  
+
 - name: install bigdesk plugin
   shell: >
     /usr/share/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk/2.2.0
+    chdir=/usr/share/elasticsearch
   when: bigdesk.stat.isdir is not defined
-  
+
 - name: Ensure elasticsearch is enabled and started
   service: name=elasticsearch state=started enabled=yes
 
