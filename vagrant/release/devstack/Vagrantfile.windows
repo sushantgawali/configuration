@@ -5,7 +5,7 @@ end
 
 VAGRANTFILE_API_VERSION = "2"
 
-MEMORY = 2048
+MEMORY = 4096
 CPU_COUNT = 2
 
 $script = <<SCRIPT
@@ -21,7 +21,6 @@ cd /edx/app/edx_ansible/edx_ansible/playbooks
 # Did we specify an openedx release?
 if [ -n "$OPENEDX_RELEASE" ]; then
   EXTRA_VARS="-e edx_platform_version=$OPENEDX_RELEASE \
-    -e ora2_version=$OPENEDX_RELEASE \
     -e certs_version=$OPENEDX_RELEASE \
     -e forum_version=$OPENEDX_RELEASE \
     -e xqueue_version=$OPENEDX_RELEASE \
@@ -37,6 +36,8 @@ else
 fi
 
 ansible-playbook -i localhost, -c local vagrant-devstack.yml --tags=deploy -e configuration_version=$CONFIG_VER $EXTRA_VARS
+echo "edxapp:testpassword"|chpasswd
+mkdir /edx/app/edxapp/edx-platform/.pycharm_helpers
 
 SCRIPT
 
@@ -78,9 +79,6 @@ openedx_releases = {
   },
   "named-release/birch" => {
     :name => "birch-devstack", :file => "20150224-birch-devstack.box",
-  },
-  "named-release/birch.1" => {
-    :name => "birch-devstack-1", :file => "birch-1-devstack.box",
   },
 }
 openedx_releases.default = {
@@ -132,6 +130,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", MEMORY.to_s]
     vb.customize ["modifyvm", :id, "--cpus", CPU_COUNT.to_s]
+    vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+    vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
 
     # Allow DNS to work for Ubuntu 12.10 host
     # http://askubuntu.com/questions/238040/how-do-i-fix-name-service-for-vagrant-client
