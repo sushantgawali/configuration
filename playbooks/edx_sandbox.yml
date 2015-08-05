@@ -18,10 +18,12 @@
     # These should stay false for the public AMI
     COMMON_ENABLE_DATADOG: False
     COMMON_ENABLE_SPLUNKFORWARDER: False
+    ENABLE_LEGACY_ORA: !!null
   roles:
     - { role: 'docker', tags: 'docker' }
     - role: nginx
       nginx_sites:
+      - certs
       - cms
       - lms
       - forum
@@ -33,13 +35,20 @@
     - mongo
     - { role: 'edxapp', celery_worker: True }
     - edxapp
+    - notifier
+    - analytics_api
+    - insights
+    - edx_notes_api
     - demo
     - { role: 'rabbitmq', rabbitmq_ip: '127.0.0.1' }
     - oraclejdk
     - elasticsearch
     - forum
+    - { role: notifier, NOTIFIER_DIGEST_TASK_INTERVAL: "5" }
     - { role: "xqueue", update_users: True }
-    - ora
+    - xqwatcher
+    - role: ora
+      when: ENABLE_LEGACY_ORA
     - certs
     - edx_ansible
     - role: datadog
