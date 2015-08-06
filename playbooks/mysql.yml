@@ -8,7 +8,7 @@
     - roles/edxapp/defaults/main.yml
     - roles/xqueue/defaults/main.yml
     - roles/ora/defaults/main.yml
-    - roles/analytics-api/defaults/main.yml
+    - roles/analytics_api/defaults/main.yml
   roles:
     - edxlocal
     - { role: 'docker', runit_service: 'mysql' }
