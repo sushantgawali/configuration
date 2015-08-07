@@ -11,7 +11,7 @@
      edx_platform_branch: appsembler_docker/release
    tasks: 
     - name: Update Open edX Configuration repo
-	  shell: /edx/bin/update configuration {{ configuration_branch }}
+      shell: /edx/bin/update configuration {{ configuration_branch }}
 
-	- name: Update Open edX edx-platform repo
-	  shell: /edx/bin/update edx-platform {{ edx_platform_branch }}
+    - name: Update Open edX edx-platform repo
+      shell: /edx/bin/update edx-platform {{ edx_platform_branch }}
