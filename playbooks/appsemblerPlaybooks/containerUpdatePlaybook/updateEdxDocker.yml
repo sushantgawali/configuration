@@ -1,0 +1,17 @@
+---
+#create inventory file using container's ip address
+#run with:
+# ansible-playbook -i testInventory.ini -c ssh updateEdxDocer.yml --private-key=insecure_key
+ - hosts: all
+   serial: 1
+   sudo: yes
+   user: root
+   vars: 
+     configuration_branch: appsembler_docker/release
+     edx_platform_branch: appsembler_docker/release
+   tasks: 
+    - name: Update Open edX Configuration repo
+	  shell: /edx/bin/update configuration {{ configuration_branch }}
+
+	- name: Update Open edX edx-platform repo
+	  shell: /edx/bin/update edx-platform {{ edx_platform_branch }}
