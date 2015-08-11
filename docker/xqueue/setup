@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+/sbin/my_init &
+cd /var/tmp/configuration/playbooks
+ansible-playbook -vvv -i 127.0.0.1, -e @/root/vars.yml -c local xqueue.yml
