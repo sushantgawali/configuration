@@ -1,0 +1,9 @@
+---
+
+- name: Configure instance(s)
+  hosts: all
+  sudo: True
+  gather_facts: True
+  roles:
+    - rabbitmq
+    - { role: 'docker', runit_service: 'rabbitmq-server' }

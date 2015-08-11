@@ -1,0 +1,3 @@
+RABBIT_USERS:
+  - name: 'xqueue'
+    password: 'xqueue'
