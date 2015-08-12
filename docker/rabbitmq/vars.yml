@@ -1,3 +1,7 @@
 RABBIT_USERS:
   - name: 'xqueue'
     password: 'xqueue'
+
+# Listen on all interfaces, since the IP might change between image creation
+# and running the container
+rabbitmq_ip: "0.0.0.0"
