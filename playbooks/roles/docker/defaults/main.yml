@@ -19,6 +19,8 @@ runit_full_services:
   - redis-server
   - supervisor
   - supervisor.devpi
+  - xqueue
+  - xqueue_consumer
 
 runit_lite_services_stop:
   - mysql

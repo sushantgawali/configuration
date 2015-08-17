@@ -10,4 +10,5 @@
       - xqueue
     - { role: 'xqueue', disable_edx_services: True }
     - { role: 'docker', runit_service: 'xqueue' }
+    - { role: 'docker', runit_service: 'xqueue_consumer' }
     - { role: 'docker', runit_service: 'nginx' }
