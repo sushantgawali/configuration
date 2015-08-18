@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: mongodb-controller
+  labels:
+    name: mongodb
+spec:
+  replicas: 1
+  selector: 
+    name: mongodb
+  template:
+    metadata:
+      labels:
+        name: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: appsembler/edx-multi-mongodb
+        ports:
+        - name: mongodb
+          containerPort: 27017
+        - name: admin
+          containerPort: 28017
