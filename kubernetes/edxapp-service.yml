@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: edxapp
+  namespace: edx
+  labels:
+    name: edxapp
+
+spec:
+  selector:
+    name: edxapp
+  ports:
+  - name: lms
+    port: 80
+    nodePort: 80
+  - name: cms
+    port: 18010
+    nodePort: 18010
+  - name: lms-preview
+    port: 18020
+    nodePort: 18020
+  type: LoadBalancer

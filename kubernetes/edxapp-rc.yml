@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ReplicationController
+
+metadata:
+  name: edxapp
+  namespace: edx
+  labels:
+    name: edxapp
+
+spec:
+  replicas: 2
+  selector:
+    name: edxapp
+  template:
+    metadata:
+      labels:
+        name: edxapp
+    spec:
+      containers:
+      - name: edxapp
+        image: appsembler/edx-multi-edxapp
+        ports:
+        - name: lms
+          containerPort: 80
+        - name: cms
+          containerPort: 18010
+        - name: lms-preview
+          containerPort: 18020
