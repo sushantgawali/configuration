@@ -23,6 +23,7 @@
     - { role: 'docker', tags: 'docker' }
     - role: nginx
       nginx_sites:
+      - certs
       - cms
       - lms
       - forum
@@ -34,6 +35,9 @@
     - mongo
     - { role: 'edxapp', celery_worker: True }
     - edxapp
+    - notifier
+    - analytics_api
+    - edx_notes_api
     - demo
     - { role: 'rabbitmq', rabbitmq_ip: '127.0.0.1' }
     - oraclejdk
