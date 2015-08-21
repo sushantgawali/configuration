@@ -18,11 +18,11 @@
     COMMON_ENABLE_DATADOG: False
     COMMON_ENABLE_SPLUNKFORWARDER: False
     edx_ansible_source_repo: "https://github.com/appsembler/configuration"
-    configuration_version: 'appsembler_docker/feature/birchMerge'
+    configuration_version: 'appsembler_docker/feature/mergeCypress'
     # used for releases
     edx_platform_repo: "https://github.com/appsembler/edx-platform.git"
-    edx_platform_version: 'appsembler_docker/feature/birchMerge'
-    forum_version: 'named-release/birch'
+    edx_platform_version: 'appsembler_docker/feature/mergeCypress'
+    forum_version: 'named-release/cypress'
     #birch changes
     EDXAPP_PYTHON_SANDBOX: false
     EDXAPP_SANDBOX_ENFORCE: false
