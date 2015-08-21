@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: rabbitmq-controller
+  labels:
+    name: rabbitmq
+spec:
+  replicas: 1
+  selector: 
+    name: rabbitmq
+  template:
+    metadata:
+      labels:
+        name: rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq
+        image: appsembler/edx-multi-rabbitmq
+        ports:
+        - name: rabbitmq
+          containerPort: 5672
+        - name: admin
+          containerPort: 15672
