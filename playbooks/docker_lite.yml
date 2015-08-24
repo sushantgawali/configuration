@@ -52,6 +52,7 @@
     - elasticsearch
     - forum
     - demo
+    - rabbitmq
     - edx_ansible
     - role: datadog
       when: COMMON_ENABLE_DATADOG
