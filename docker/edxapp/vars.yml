@@ -1,3 +1,4 @@
+edxapp_platform_version: 'appsembler_docker/release'
 EDXAPP_PLATFORM_NAME: 'Docker'
 EDXAPP_LMS_NGINX_PORT: 80
 EDXAPP_LMS_ENV: 'lms.envs.docker_multi'

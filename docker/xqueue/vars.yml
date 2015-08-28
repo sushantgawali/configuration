@@ -1,3 +1,4 @@
+xqueue_version: 'named-release/cypress'
 XQUEUE_NGINX_PORT: 18040
 
 XQUEUE_RABBITMQ_USER: 'xqueue'

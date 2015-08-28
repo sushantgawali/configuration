@@ -10,7 +10,6 @@
     # These should stay false for the public AMI
     COMMON_ENABLE_DATADOG: False
     COMMON_ENABLE_SPLUNKFORWARDER: False
-    edx_platform_version: 'docker_release'
   roles:
     - { role: 'docker', runit_service: 'supervisor', supervisor_version: 'solo' }
     - { role: 'docker', runit_service: 'supervisor.devpi' }

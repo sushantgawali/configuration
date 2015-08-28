@@ -1,6 +1,7 @@
 EDXAPP_PLATFORM_NAME: 'Docker'
 
 # Forum
+forum_version: 'named-release/cypress'
 EDXAPP_COMMENTS_SERVICE_URL:  'http://forum:18080'
 FORUM_API_KEY: 'azuaWoh3Qu'
 
