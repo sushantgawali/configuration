@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: elasticsearch
-        image: appsembler/edx-multi-elasticsearch
+        image: us.gcr.io/appsemblerx/edx-multi-elasticsearch
         ports:
         - name: elasticsearch
           containerPort: 9200

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: appsembler/edx-multi-mongodb
+        image: us.gcr.io/appsemblerx/edx-multi-mongodb
         ports:
         - name: mongodb
           containerPort: 27017

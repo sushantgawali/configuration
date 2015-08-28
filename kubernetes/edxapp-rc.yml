@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: edxapp
-        image: appsembler/edx-multi-edxapp
+        image: us.gcr.io/appsemblerx/edx-multi-edxapp
         ports:
         - name: lms
           containerPort: 80

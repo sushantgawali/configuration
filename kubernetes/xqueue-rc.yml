@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: xqueue
-        image: appsembler/edx-multi-xqueue
+        image: us.gcr.io/appsemblerx/edx-multi-xqueue
         ports:
         - name: xqueue
           containerPort: 18040

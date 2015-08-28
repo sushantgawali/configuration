@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: forum
-        image: appsembler/edx-multi-forum
+        image: us.gcr.io/appsemblerx/edx-multi-forum
         ports:
         - name: forum
           containerPort: 18080

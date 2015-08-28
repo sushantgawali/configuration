@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: appsembler/edx-multi-mysql
+        image: us.gcr.io/appsemblerx/edx-multi-mysql
         ports:
         - name: mysql
           containerPort: 3306

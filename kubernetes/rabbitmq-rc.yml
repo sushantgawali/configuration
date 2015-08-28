@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: rabbitmq
-        image: appsembler/edx-multi-rabbitmq
+        image: us.gcr.io/appsemblerx/edx-multi-rabbitmq
         ports:
         - name: rabbitmq
           containerPort: 5672
