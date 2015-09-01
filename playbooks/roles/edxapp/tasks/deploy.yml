@@ -50,7 +50,7 @@
 
 - name: fix django logging inside docker
   lineinfile: 
-    dest={{edxapp_code_dir}}/common/lib/logsettings.py
+    dest={{edxapp_code_dir}}/openedx/core/lib/logsettings.py
     regexp="/dev/log"
     state=absent
 
