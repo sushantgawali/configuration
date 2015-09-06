@@ -52,7 +52,7 @@
     - elasticsearch
     - forum
     - demo
-    - rabbitmq
+    - { role: rabbitmq, rabbitmq_ip: '127.0.0.1' }
     - edx_ansible
     - role: datadog
       when: COMMON_ENABLE_DATADOG
