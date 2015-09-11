@@ -25,6 +25,10 @@
   stat: path=/home/vagrant
   register: vagrant_home_dir
 
+# Need to install python-pycurl to use Ansible's apt_repository module
+- name: Install python-pycurl
+  apt: pkg=python-pycurl state=present update_cache=yes
+
 # Ensure that we get a current version of Git
 # GitHub requires version 1.7.10 or later
 # https://help.github.com/articles/https-cloning-errors
@@ -118,4 +122,3 @@
     dest=/etc/ssh/sshd_config
     src=sshd_config.j2 mode=0644 owner=root group=root
   notify: restart ssh
-  

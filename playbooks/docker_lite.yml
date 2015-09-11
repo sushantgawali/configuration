@@ -17,10 +17,23 @@
     # These should stay false for the public AMI
     COMMON_ENABLE_DATADOG: False
     COMMON_ENABLE_SPLUNKFORWARDER: False
-    OPENEDX_RELEASE: 'aspen.1'
+    edx_ansible_source_repo: "https://github.com/appsembler/configuration"
+    configuration_version: 'appsembler_docker/feature/mergeCypress'
     # used for releases
-    edx_platform_version: 'docker_release'
-    forum_version: '{{ OPENEDX_RELEASE | default("master") }}'
+    edx_platform_repo: "https://github.com/appsembler/edx-platform.git"
+    edx_platform_version: 'appsembler_docker/feature/mergeCypress'
+    forum_version: 'named-release/cypress'
+    #birch changes
+    EDXAPP_PYTHON_SANDBOX: false
+    EDXAPP_SANDBOX_ENFORCE: false
+    EDXAPP_LMS_ENV: 'lms.envs.docker'
+    EDXAPP_CMS_ENV: 'cms.envs.docker'
+    APP_WORKERS:
+      lms: 4
+      cms: 2
+    worker_core_mult:
+      lms: 1
+      cms: 1
   roles:
     - edx_ansible
     - { role: 'docker', version: 'lite', tags: 'runit' }
@@ -39,6 +52,7 @@
     - elasticsearch
     - forum
     - demo
+    - { role: rabbitmq, rabbitmq_ip: '127.0.0.1' }
     - edx_ansible
     - role: datadog
       when: COMMON_ENABLE_DATADOG
@@ -48,3 +62,4 @@
       when: COMMON_ENABLE_NEWRELIC
     # run the docker scripts again to relink init.d scripts to runit
     - { role: 'docker', version: 'lite', tags: 'runit' }
+

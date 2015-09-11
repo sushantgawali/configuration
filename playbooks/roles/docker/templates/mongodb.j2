@@ -3,7 +3,8 @@ set -e
 ulimit -f unlimited
 ulimit -t unlimited
 ulimit -v unlimited
-ulimit -n 64000
+# don't fail if setting ulimit is not allowed
+ulimit -n 64000 || true
 ulimit -m unlimited
 exec /sbin/setuser mongodb /usr/bin/mongod --config /etc/mongod.conf
 
