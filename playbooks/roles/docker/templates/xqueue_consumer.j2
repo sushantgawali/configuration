@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-environment=LANG={{ XQUEUE_LANG }}
-WORKERS_PER_QUEUE={{xqueue_env_config.XQUEUE_WORKERS_PER_QUEUE}}
-SERVICE_VARIANT="xqueue"
+export LANG={{ XQUEUE_LANG }}
+export WORKERS_PER_QUEUE={{xqueue_env_config.XQUEUE_WORKERS_PER_QUEUE}}
+export SERVICE_VARIANT="xqueue"
 
 exec /sbin/setuser {{ common_web_user }} {{ xqueue_venv_bin }}/django-admin.py run_consumer --pythonpath={{ xqueue_code_dir }} --settings=xqueue.aws_settings $WORKERS_PER_QUEUE

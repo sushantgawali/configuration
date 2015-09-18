@@ -2,15 +2,15 @@
 set -e
 
 {% if COMMON_ENABLE_NEWRELIC_APP %}
-NEW_RELIC_APP_NAME={{ XQUEUE_NEWRELIC_APPNAME }}
-NEW_RELIC_LICENSE_KEY={{ NEWRELIC_LICENSE_KEY }}
-{% endif -%}
-PID=/var/tmp/xqueue.pid
-PORT={{ xqueue_gunicorn_port }}
-ADDRESS={{ xqueue_gunicorn_host }}
-LANG={{ XQUEUE_LANG }}
-DJANGO_SETTINGS_MODULE=xqueue.aws_settings
-SERVICE_VARIANT="xqueue"
+export NEW_RELIC_APP_NAME={{ XQUEUE_NEWRELIC_APPNAME }}
+export NEW_RELIC_LICENSE_KEY={{ NEWRELIC_LICENSE_KEY }}
+{% endif %}
+export PID=/var/tmp/xqueue.pid
+export PORT={{ xqueue_gunicorn_port }}
+export ADDRESS={{ xqueue_gunicorn_host }}
+export LANG={{ XQUEUE_LANG }}
+export DJANGO_SETTINGS_MODULE=xqueue.aws_settings
+export SERVICE_VARIANT="xqueue"
 
 {% if COMMON_ENABLE_NEWRELIC_APP %}
 {% set executable = xqueue_venv_bin + '/newrelic-admin run-program ' + xqueue_venv_bin + '/gunicorn' %}
