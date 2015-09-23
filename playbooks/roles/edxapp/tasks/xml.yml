@@ -53,7 +53,7 @@
 
 - name: import courses with nostatic flag
   shell: >
-    {{ edxapp_venv_bin }}/python manage.py cms --settings=aws import --nostatic {{ edxapp_course_data_dir }} {{ item.repo_name }}
+    {{ edxapp_venv_bin }}/python manage.py cms --settings=docker_multi import --nostatic {{ edxapp_course_data_dir }} {{ item.repo_name }}
     chdir="{{ edxapp_code_dir }}"
   sudo_user: "{{ edxapp_user }}"
   with_items: EDXAPP_XML_COURSES
@@ -61,7 +61,7 @@
   
 - name: import courses including static data
   shell: >
-    {{ edxapp_venv_bin }}/python manage.py cms --settings=aws import {{ edxapp_course_data_dir }} {{ item.repo_name }}
+    {{ edxapp_venv_bin }}/python manage.py cms --settings=docker_multi import {{ edxapp_course_data_dir }} {{ item.repo_name }}
     chdir="{{ edxapp_code_dir }}"
   sudo_user: "{{ edxapp_user }}"
   with_items: EDXAPP_XML_COURSES
