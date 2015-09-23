@@ -1,10 +1,10 @@
 apiVersion: v1
-kind: Service
+kind: Endpoints
 metadata:
   name: mysql
-  labels:
-    name: mysql
-spec:
+subsets:
+- addresses:
+  - IP: 173.194.231.5
   ports:
   - name: mysql
     port: 3306
