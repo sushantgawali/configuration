@@ -1,0 +1,14 @@
+---
+
+- name: Configure instance(s)
+  hosts: all
+  sudo: True
+  gather_facts: True
+  vars:
+    MONGO_CLUSTERED: True
+    # The following should be overrided to create a replica set:
+    # MONGO_CLUSTER_KEY: ''
+    # mongo_repl_set: ''
+    # mongo_cluster_members: []
+  roles:
+    - mongo

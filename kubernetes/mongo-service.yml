@@ -5,8 +5,7 @@ metadata:
   labels:
     name: mongo
 spec:
-  selector:
-    name: mongodb
+  clusterIP: None
   ports:
   - name: mongodb
     port: 27017
