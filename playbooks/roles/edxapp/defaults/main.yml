@@ -60,6 +60,7 @@ EDXAPP_MONGO_PORT: 27017
 EDXAPP_MONGO_USER: 'edxapp'
 EDXAPP_MONGO_DB_NAME: 'edxapp'
 EDXAPP_MONGO_USE_SSL: False
+EDXAPP_MONGO_REPLICA_SET: !!null
 
 EDXAPP_MYSQL_DB_NAME: 'edxapp'
 EDXAPP_MYSQL_USER: 'edxapp001'
@@ -598,6 +599,7 @@ edxapp_generic_doc_store_config: &edxapp_generic_default_docstore
   user: "{{ EDXAPP_MONGO_USER }}"
   collection:  'modulestore'
   ssl: "{{ EDXAPP_MONGO_USE_SSL }}"
+  replicaSet: "{{ EDXAPP_MONGO_REPLICA_SET }}"
 
 EDXAPP_LMS_DRAFT_DOC_STORE_CONFIG:
   <<: *edxapp_generic_default_docstore
@@ -634,6 +636,7 @@ edxapp_generic_auth_config:  &edxapp_generic_auth
       port: "{{ EDXAPP_MONGO_PORT }}"
       user: "{{ EDXAPP_MONGO_USER }}"
       ssl: "{{ EDXAPP_MONGO_USE_SSL }}"
+      replicaSet: "{{ EDXAPP_MONGO_REPLICA_SET }}"
     ADDITIONAL_OPTIONS: "{{ EDXAPP_CONTENTSTORE_ADDITIONAL_OPTS }}"
     DOC_STORE_CONFIG: *edxapp_generic_default_docstore
   DATABASES:
