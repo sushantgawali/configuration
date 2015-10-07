@@ -13,7 +13,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update &&  \
     apt-get install -y python-dev python-setuptools python-apt gcc git-core && \
     easy_install pip &&  \
-    git clone https://github.com/appsembler/configuration.git -b appsembler_docker/feature/mergeCypress/configuration && \
+    git clone https://github.com/appsembler/configuration.git -b appsembler_docker/feature/mergeCypress && \
     pip install -r configuration/requirements.txt
 
 WORKDIR /configuration/playbooks
