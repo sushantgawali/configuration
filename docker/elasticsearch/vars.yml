@@ -1,1 +1,2 @@
-EDXAPP_PLATFORM_NAME: 'Docker'
+COMMON_ENVIRONMENT: "appsembler-academy"
+COMMON_DEPLOYMENT: "production"

@@ -14,3 +14,6 @@ MONGO_USERS:
     password: 'password'
     database: 'edxapp'
     roles: 'readWrite'
+
+COMMON_ENVIRONMENT: "appsembler-academy"
+COMMON_DEPLOYMENT: "production"

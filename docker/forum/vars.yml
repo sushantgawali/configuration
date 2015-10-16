@@ -1,8 +1,3 @@
-EDXAPP_PLATFORM_NAME: 'Docker'
-
-# Forum
-forum_version: 'named-release/cypress'
-EDXAPP_COMMENTS_SERVICE_URL:  'http://forum:18080'
 FORUM_API_KEY: 'azuaWoh3Qu'
 
 FORUM_MONGO_USER: 'cs_comments_service'
@@ -16,7 +11,10 @@ FORUM_RACK_ENV: 'production'
 forum_user: "forum"
 forum_ruby_version: "1.9.3-p448"
 forum_source_repo: "https://github.com/edx/cs_comments_service.git"
-forum_version: "master"
+forum_version: "named-release/cypress"
 
 FORUM_ELASTICSEARCH_HOST: 'elasticsearch'
 FORUM_ELASTICSEARCH_PORT: 9200
+
+COMMON_ENVIRONMENT: "appsembler-academy"
+COMMON_DEPLOYMENT: "production"
