@@ -1,16 +1,18 @@
-edxapp_platform_version: 'appsembler_docker/release'
-EDXAPP_PLATFORM_NAME: 'Docker'
+#edx_platform_version: 'appsembler_docker/release'
+edx_platform_version: 'appsembler_docker/feature/kubernetes'
+edx_platform_repo: 'https://github.com/appsembler/edx-platform.git'
 EDXAPP_LMS_NGINX_PORT: 80
 EDXAPP_LMS_ENV: 'lms.envs.docker_multi'
 EDXAPP_CMS_ENV: 'cms.envs.docker_multi'
+EDXAPP_PLATFORM_SETTINGS: 'docker_multi'
 EDXAPP_WORKERS:
   lms: 2
   cms: 1
 
 # MySQL
 EDXAPP_MYSQL_DB_NAME: 'edxapp'
-EDXAPP_MYSQL_USER: 'edxapp'
-EDXAPP_MYSQL_PASSWORD: 'Wuk8faewae'
+EDXAPP_MYSQL_USER: 'edxapp001'
+#EDXAPP_MYSQL_PASSWORD: ''
 EDXAPP_MYSQL_USER_HOST: '%'
 EDXAPP_MYSQL_HOST: 'mysql'
 EDXAPP_MYSQL_PORT: '3306'
@@ -21,14 +23,226 @@ EDXAPP_MYSQL_PASSWORD_READ_ONLY: "{{ EDXAPP_MYSQL_PASSWORD }}"
 EDXAPP_MYSQL_PASSWORD_ADMIN: "{{ EDXAPP_MYSQL_PASSWORD }}"
 EDXAPP_MYSQL_PASSWORD_MIGRATE: "{{ EDXAPP_MYSQL_PASSWORD }}"
 
+# Memcached
+EDXAPP_MEMCACHE: [ 'memcached:11211' ]
+
 # Mongo DB
 EDXAPP_MONGO_HOSTS: ['mongodb']
-EDXAPP_MONGO_PORT: "27017"
+EDXAPP_MONGO_PORT: 27017
 EDXAPP_MONGO_DB_NAME: 'docker-edxapp'
 EDXAPP_MONGO_USER: 'edxapp'
-EDXAPP_MONGO_PASSWORD: 'daheiYae2c'
-MONGO_BIND_IP: '0.0.0.0'
+#EDXAPP_MONGO_PASSWORD: ''
+EDXAPP_MONGO_REPLICA_SET: 'rs0'
 
 # Forum
 EDXAPP_COMMENTS_SERVICE_URL:  'http://forum:18080'
-EDXAPP_COMMENTS_SERVICE_KEY: 'azuaWoh3Qu'
+#EDXAPP_COMMENTS_SERVICE_KEY: ''
+
+# XQueue
+#EDXAPP_XQUEUE_BASIC_AUTH: [ "{{ COMMON_HTPASSWD_USER }}", "{{ COMMON_HTPASSWD_PASS }}" ]
+#EDXAPP_XQUEUE_DJANGO_AUTH:
+#  username: 'lms'
+#  password: ''
+EDXAPP_XQUEUE_URL: 'http://xqueue:18040'
+
+# RabbitMQ
+EDXAPP_RABBIT_HOSTNAME: 'rabbitmq'
+
+# edx_ansible
+edx_ansible_source_repo: "https://github.com/appsembler/configuration.git"
+configuration_version: "docker_multi_release"
+
+# Serve static assets from S3
+EDXAPP_DEFAULT_FILE_STORAGE: "storages.backends.s3boto.S3BotoStorage"
+EDXAPP_AWS_STORAGE_BUCKET_NAME: "appsemblerx-static"
+EDXAPP_STATIC_URL_BASE: "https://appsemblerx-static.s3.amazonaws.com/"
+EDXAPP_ENV_EXTRA:
+  STATICFILES_STORAGE: "storages.backends.s3boto.S3BotoStorage"
+
+
+## Appsembler Academy ##
+
+#EDXAPP_LMS_ENV: 'lms.envs.aws_appsembler'
+#EDXAPP_CMS_ENV: 'cms.envs.aws_appsembler'
+
+#EDXAPP_APPSEMBLER_FEATURES:
+#  INTERCOM_APP_ID: ''
+#  INTERCOM_API_KEY: ''
+#  INTERCOM_USER_EMAIL: ''
+#  MANDRILL_API_KEY: ''
+
+#EDXAPP_YOUTUBE_API_KEY: ''
+
+#edx_platform_repo: "https://github.com/appsembler/edx-platform.git"
+#edx_ansible_source_repo: "https://github.com/appsembler/configuration"
+
+#edx_platform_version: appsembler/feature/mergeCypress
+#configuration_version: appsembler/feature/mergeCypress
+ora2_version: named-release/cypress
+certs_version: named-release/cypress
+forum_version: named-release/cypress
+xqueue_version: named-release/cypress
+
+EDXAPP_FEATURES:
+  AUTH_USE_OPENID_PROVIDER: true
+  ALLOW_ALL_ADVANCED_COMPONENTS: true
+  ENABLE_SYSADMIN_DASHBOARD: True
+  #ENABLE_CREATOR_GROUP: true
+  CERTIFICATES_ENABLED: false
+  ENABLE_DISCUSSION_SERVICE: true
+  ENABLE_INSTRUCTOR_ANALYTICS: false
+  ENABLE_INSTRUCTOR_EMAIL: false
+  SUBDOMAIN_BRANDING: false
+  SUBDOMAIN_COURSE_LISTINGS: false
+  PREVIEW_LMS_BASE: "{{ EDXAPP_PREVIEW_LMS_BASE }}"
+  ENABLE_S3_GRADE_DOWNLOADS: false
+  USE_CUSTOM_THEME: "{{ edxapp_use_custom_theme }}"
+  ENABLE_MKTG_SITE: "{{ EDXAPP_ENABLE_MKTG_SITE }}"
+  AUTOMATIC_AUTH_FOR_TESTING: "{{ EDXAPP_ENABLE_AUTO_AUTH }}"
+  ENABLE_THIRD_PARTY_AUTH: "{{ EDXAPP_ENABLE_THIRD_PARTY_AUTH }}"
+  ENABLE_VIDEO_UPLOAD_PIPELINE: false
+  ENABLE_DISCUSSION_HOME_PANEL: true
+  ENABLE_CONTENT_LIBRARIES: true
+  #for matej's theme
+  THEME_FOLDER: 'appsembler-academy'
+  #search features in CMS
+  ENABLE_COURSEWARE_INDEX: true
+  ENABLE_LIBRARY_INDEX: true
+  #search features in LMS
+  ENABLE_COURSEWARE_SEARCH: true
+  ENABLE_DASHBOARD_SEARCH: true
+  ENABLE_COURSE_DISCOVERY: true
+  # mobile login:
+  ENABLE_COMBINED_LOGIN_REGISTRATION: true
+  ENABLE_MOBILE_REST_API: true
+  ENABLE_OAUTH2_PROVIDER: true
+  # segment with google analytics (paired with segment io lms key):
+  SEGMENT_IO_LMS: true
+
+EDXAPP_MOBILE_STORE_URLS:
+  APPLE: "https://itunes.apple.com/us/app/appsembler-academy/id1044418100?ls=1&mt=8"
+
+#EDXAPP_SEGMENT_IO_LMS_KEY: ""
+
+EDXAPP_OAUTH_ENFORCE_SECURE: ""    # necessary for mobile authentication if no ssl cert
+
+EDXAPP_PLATFORM_NAME: "Appsembler Academy"
+COMMON_ENVIRONMENT: "appsembler-academy"
+COMMON_DEPLOYMENT: "production"
+
+## Theme
+edxapp_use_custom_theme: true  # false to disable & use std. theme
+edxapp_theme_name: "appsembler-academy"
+edxapp_theme_source_repo: "https://github.com/appsembler/edx-theme.git"
+edxapp_theme_version: "appsembler/appsembler-academy"
+
+## NGINX Config
+#NGINX_ENABLE_SSL: true
+#NGINX_SSL_CERTIFICATE: "/edx/app/certs/ssl/STAR.appsembler.com-bundle.crt"
+#NGINX_SSL_KEY: "/edx/app/certs/ssl/STAR.appsembler.com.key"
+NGINX_SET_X_FORWARDED_HEADERS: True #set to True if not behind load balancer
+#EDXAPP_LMS_NGINX_PORT: 80
+#EDXAPP_LMS_SSL_NGINX_PORT: 443
+#EDXAPP_LMS_PREVIEW_NGINX_PORT: 80
+EDXAPP_CMS_NGINX_PORT: 80
+#EDXAPP_CMS_SSL_NGINX_PORT: 443
+#CMS_HOSTNAME: '~^((stage|prod)-)?studio.*' #for redirect within nginx
+
+nginx_sites:
+  - cms
+  - lms
+#  - forum
+#  - ora
+#  - xqueue
+nginx_default_sites:
+  - lms
+#COMMON_HTPASSWD_USER: "user"
+#COMMON_HTPASSWD_PASS: "password"
+COMMON_ENABLE_BASIC_AUTH: False
+
+NGINX_ROBOT_RULES:
+  - { agent: '*', disallow: '/' }
+
+## Base
+EDXAPP_LMS_BASE: "academy.appsembler.com"
+EDXAPP_PREVIEW_LMS_BASE: "preview-academy.appsembler.com"
+EDXAPP_CMS_BASE: "studio-academy.appsembler.com"
+
+## Site names
+EDXAPP_SITE_NAME: "academy.appsembler.com"
+EDXAPP_LMS_SITE_NAME: "academy.appsembler.com"
+EDXAPP_CMS_SITE_NAME: "studio-academy.appsembler.com"
+
+## Social media
+#EDXAPP_PLATFORM_FACEBOOK_ACCOUNT: "http://www.facebook.com/accountName"
+#EDXAPP_PLATFORM_TWITTER_ACCOUNT: "@twitterHandle"
+
+## Email addresses
+EDXAPP_CONTACT_EMAIL: "customerservice@appsembler.com"
+EDXAPP_DEFAULT_FEEDBACK_EMAIL: "customerservice@appsembler.com"
+EDXAPP_DEFAULT_FROM_EMAIL: "customerservice@appsembler.com"
+EDXAPP_BUGS_EMAIL: "bugs@appsembler.com"
+EDXAPP_BULK_EMAIL_DEFAULT_FROM_EMAIL: "customerservice@appsembler.com"
+EDXAPP_PAYMENT_SUPPORT_EMAIL: "customerservice@appsembler.com"
+EDXAPP_PRESS_EMAIL: "customerservice@appsembler.com"
+EDXAPP_SERVER_EMAIL: "devops@appsembler.com"
+EDXAPP_TECH_SUPPORT_EMAIL: "technical@appsembler.com"
+EDXAPP_FEEDBACK_SUBMISSION_EMAIL: "customerservice@appsembler.com"
+EDXAPP_UNIVERSITY_EMAIL: "customerservice@appsembler.com"
+
+## Email backend
+EDXAPP_EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
+EDXAPP_EMAIL_HOST: "smtp.mandrillapp.com"
+EDXAPP_EMAIL_PORT: 2525
+EDXAPP_EMAIL_HOST_USER: "nate@appsembler.com"
+#EDXAPP_EMAIL_HOST_PASSWORD: ""
+EDXAPP_EMAIL_USE_TLS: true
+
+# AWS S3 configuration
+#EDXAPP_AWS_ACCESS_KEY_ID: "xxxxx"
+#EDXAPP_AWS_SECRET_ACCESS_KEY: "xxxxx"
+#EDXAPP_AWS_STORAGE_BUCKET_NAME: "bucket-edxuploads"
+
+# Setting up New Relic
+#COMMON_ENABLE_NEWRELIC: True
+#COMMON_ENABLE_NEWRELIC_APP: True
+#NEWRELIC_LICENSE_KEY: ""
+#NEWRELIC_APP_NAME: "NR_APP_NAME"
+
+# gunicorn workers
+EDXAPP_WORKERS:
+  lms: 5
+  cms: 1
+
+# celery workers
+EDXAPP_BROKER_HEARTBEAT: 0
+
+EDXAPP_CELERY_WORKERS:
+  - queue: low
+    service_variant: cms
+    concurrency: 1
+    monitor: true
+  - queue: default
+    service_variant: cms
+    concurrency: 1
+    monitor: true
+  - queue: high
+    service_variant: cms
+    concurrency: 1
+    monitor: true
+  - queue: low
+    service_variant: lms
+    concurrency: 1
+    monitor: true
+  - queue: default
+    service_variant: lms
+    concurrency: 1
+    monitor: true
+  - queue: high
+    service_variant: lms
+    concurrency: 1
+    monitor: true
+  - queue: high_mem
+    service_variant: lms
+    concurrency: 1
+    monitor: true
