@@ -21,6 +21,9 @@ RUN chmod 777 /root/setup
 
 RUN /root/setup && apt-get clean
 
+# Properly initialize RabbitMQ on container startup
+ADD rabbitmq-configure /etc/service/rabbitmq-configure/run
+
 EXPOSE 5672 15672
 
 CMD ["/sbin/my_init", "--enable-insecure-key"]
