@@ -1,6 +1,6 @@
-RABBIT_USERS:
-  - name: 'xqueue'
-    password: 'xqueue'
+#RABBIT_USERS:
+#  - name: ''
+#    password: ''
 
 # Listen on all interfaces, since the IP might change between image creation
 # and running the container
