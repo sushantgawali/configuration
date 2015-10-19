@@ -1,7 +1,6 @@
 #edx_platform_version: 'appsembler_docker/release'
 edx_platform_version: 'appsembler_docker/feature/kubernetes'
 edx_platform_repo: 'https://github.com/appsembler/edx-platform.git'
-EDXAPP_LMS_NGINX_PORT: 80
 EDXAPP_LMS_ENV: 'lms.envs.docker_multi'
 EDXAPP_CMS_ENV: 'cms.envs.docker_multi'
 EDXAPP_PLATFORM_SETTINGS: 'docker_multi'
@@ -137,15 +136,17 @@ edxapp_theme_source_repo: "https://github.com/appsembler/edx-theme.git"
 edxapp_theme_version: "appsembler/appsembler-academy"
 
 ## NGINX Config
-#NGINX_ENABLE_SSL: true
-#NGINX_SSL_CERTIFICATE: "/edx/app/certs/ssl/STAR.appsembler.com-bundle.crt"
-#NGINX_SSL_KEY: "/edx/app/certs/ssl/STAR.appsembler.com.key"
+NGINX_ENABLE_SSL: true
+NGINX_SSL_CERTIFICATE: "star.appsembler.com.crt"
+NGINX_SSL_KEY: "star.appsembler.com.key"
+NGINX_SSL_CERTIFICATE_DIR: "/secrets"
+NGINX_SSL_KEY_DIR: "/secrets"
 NGINX_SET_X_FORWARDED_HEADERS: True #set to True if not behind load balancer
-#EDXAPP_LMS_NGINX_PORT: 80
-#EDXAPP_LMS_SSL_NGINX_PORT: 443
+EDXAPP_LMS_NGINX_PORT: 80
+EDXAPP_LMS_SSL_NGINX_PORT: 443
 #EDXAPP_LMS_PREVIEW_NGINX_PORT: 80
 EDXAPP_CMS_NGINX_PORT: 80
-#EDXAPP_CMS_SSL_NGINX_PORT: 443
+EDXAPP_CMS_SSL_NGINX_PORT: 443
 #CMS_HOSTNAME: '~^((stage|prod)-)?studio.*' #for redirect within nginx
 
 nginx_sites:
