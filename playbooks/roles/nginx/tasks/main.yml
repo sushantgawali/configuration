@@ -160,14 +160,14 @@
 - name: copy ssl cert
   copy: >
     src={{ NGINX_SSL_CERTIFICATE }}
-    dest=/etc/ssl/certs/
+    dest={{ NGINX_SSL_CERTIFICATE_DIR }}
     owner=root group=root mode=0644
   when: ssl_cert.stat.exists and NGINX_ENABLE_SSL and NGINX_SSL_CERTIFICATE != 'ssl-cert-snakeoil.pem'
 
 - name: copy ssl key
   copy: >
     src={{ NGINX_SSL_KEY }}
-    dest=/etc/ssl/private/
+    dest={{ NGINX_SSL_KEY_DIR }}
     owner=root group=root mode=0640
   when: ssl_key.stat.exists and NGINX_ENABLE_SSL and NGINX_SSL_KEY != 'ssl-cert-snakeoil.key'
 

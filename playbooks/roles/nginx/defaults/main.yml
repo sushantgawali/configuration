@@ -22,6 +22,8 @@ NGINX_ENABLE_SSL: False
 
 NGINX_SSL_CERTIFICATE: 'ssl-cert-snakeoil.pem'
 NGINX_SSL_KEY: 'ssl-cert-snakeoil.key'
+NGINX_SSL_CERTIFICATE_DIR: '/etc/ssl/certs'
+NGINX_SSL_KEY_DIR: '/etc/ssl/private'
 
 NGINX_LOG_FORMAT_NAME: 'p_combined'
 # When set to False, nginx will pass X-Forwarded-For, X-Forwarded-Port,
