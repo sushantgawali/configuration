@@ -10,6 +10,13 @@ upstream cms-backend {
     {% endfor %}
 }
 
+{% if NGINX_ENABLE_SSL %}
+server {
+  listen {{ EDXAPP_CMS_NGINX_PORT }} {{ default_site }};
+  return 301 https://$host$request_uri;
+}
+{% endif %}
+
 server {
   # CMS configuration file for nginx, templated by ansible
       
@@ -32,7 +39,6 @@ error_page {{ k }} {{ v }};
 
   {% if NGINX_ENABLE_SSL %}
 
-  listen {{ EDXAPP_CMS_NGINX_PORT }} {{ default_site }};
   listen {{ EDXAPP_CMS_SSL_NGINX_PORT }} ssl;
 
   ssl_certificate {{ NGINX_SSL_CERTIFICATE_DIR }}/{{ NGINX_SSL_CERTIFICATE|basename }};

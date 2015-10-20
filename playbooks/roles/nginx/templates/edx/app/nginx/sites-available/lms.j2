@@ -32,6 +32,13 @@ geo $http_x_forwarded_for $embargo {
 }
 {%- endif %}
 
+{% if NGINX_ENABLE_SSL %}
+server {
+  listen {{ EDXAPP_LMS_NGINX_PORT }} {{ default_site }};
+  return 301 https://$host$request_uri;
+}
+{% endif %}
+
 server {
   # LMS configuration file for nginx, templated by ansible
 
@@ -54,7 +61,6 @@ error_page {{ k }} {{ v }};
 
   {% if NGINX_ENABLE_SSL %}
 
-  listen {{ EDXAPP_LMS_NGINX_PORT }} {{ default_site }};
   listen {{ EDXAPP_LMS_SSL_NGINX_PORT }} {{ default_site }} ssl;
 
   ssl_certificate {{ NGINX_SSL_CERTIFICATE_DIR }}/{{ NGINX_SSL_CERTIFICATE|basename }};
