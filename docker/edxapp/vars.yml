@@ -56,7 +56,7 @@ EDXAPP_DEFAULT_FILE_STORAGE: "storages.backends.s3boto.S3BotoStorage"
 EDXAPP_AWS_STORAGE_BUCKET_NAME: "appsemblerx-static"
 EDXAPP_STATIC_URL_BASE: "https://appsemblerx-static.s3.amazonaws.com/"
 EDXAPP_ENV_EXTRA:
-  STATICFILES_STORAGE: "storages.backends.s3boto.S3BotoStorage"
+  STATICFILES_STORAGE: "pavelib.utils.storage.S3ZippedPipelineStorage"
 
 
 ## Appsembler Academy ##
