@@ -1,7 +1,7 @@
-FORUM_API_KEY: 'azuaWoh3Qu'
+#FORUM_API_KEY: ''
 
 FORUM_MONGO_USER: 'cs_comments_service'
-FORUM_MONGO_PASSWORD: 'NeepahGh9V'
+#FORUM_MONGO_PASSWORD: ''
 FORUM_MONGO_HOSTS: ['mongo']
 FORUM_MONGO_PORT: "27017"
 FORUM_MONGO_DB_NAME: 'cs_comments_service'

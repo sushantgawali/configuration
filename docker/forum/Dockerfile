@@ -24,6 +24,9 @@ RUN chmod 777 /root/setup
 
 RUN /root/setup && apt-get clean
 
+# Add configuration script to run on startup
+ADD configure /etc/service/configure/run
+
 EXPOSE 18080
 
 CMD ["/sbin/my_init", "--enable-insecure-key"]
