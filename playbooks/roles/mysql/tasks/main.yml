@@ -232,5 +232,12 @@
     login_host='{{ MYSQL_LOGIN_HOST }}'
     login_port='{{ MYSQL_LOGIN_PORT }}'
 
+- name: copy MySQL configuration file
+  template: >
+    src=my.cnf.j2
+    dest=/etc/mysql/my.cnf
+  notify:
+    - restart mysql
+
 - name: install memcached
   apt: pkg=memcached state=present
