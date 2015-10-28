@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-init
+  labels:
+    name: mysql-init
+spec:
+  containers:
+  - name: mysql-init
+    image: us.gcr.io/appsemblerx/edx-multi-mysql-init
+    volumeMounts:
+    - name: secret-vars
+      mountPath: /secrets/secret-vars
+      readOnly: true
+  volumes:
+  - name: secret-vars
+    secret:
+      secretName: mysql-init
+  restartPolicy: OnFailure

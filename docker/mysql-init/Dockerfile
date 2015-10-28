@@ -8,4 +8,4 @@ WORKDIR /root/configuration
 RUN pip install -r requirements.txt
 
 WORKDIR /root/configuration/playbooks
-CMD ["/usr/local/bin/ansible-playbook -vvv -i 127.0.0.1, -e @/root/vars.yml -e @/root/secrets.yml -c local mysql-init.yml"]
+CMD ["/usr/local/bin/ansible-playbook", "-vvv", "-i", "127.0.0.1,", "-e", "@/root/vars.yml", "-e", "@/secrets/secret-vars/mysql-init", "-c", "local", "mysql-init.yml"]
