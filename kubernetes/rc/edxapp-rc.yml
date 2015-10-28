@@ -19,9 +19,15 @@ spec:
       - name: edxapp
         image: us.gcr.io/appsemblerx/edx-multi-edxapp
         ports:
-        - name: lms
+        - name: http
           containerPort: 80
-        - name: cms
-          containerPort: 18010
-        - name: lms-preview
-          containerPort: 18020
+        - name: https
+          containerPort: 443
+        volumeMounts:
+        - name: nginx-cert
+          mountPath: /secrets
+          readOnly: true
+      volumes:
+      - name: nginx-cert
+        secret:
+          secretName: nginx-cert

@@ -10,10 +10,8 @@ spec:
   selector:
     name: edxapp
   ports:
-  - name: lms
+  - name: http
     port: 80
-  - name: cms
-    port: 18010
-  - name: lms-preview
-    port: 18020
+  - name: https
+    port: 443
   type: LoadBalancer
