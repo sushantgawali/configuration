@@ -139,8 +139,8 @@ edxapp_theme_version: "appsembler/appsembler-academy"
 NGINX_ENABLE_SSL: true
 NGINX_SSL_CERTIFICATE: "star.appsembler.com.crt"
 NGINX_SSL_KEY: "star.appsembler.com.key"
-NGINX_SSL_CERTIFICATE_DIR: "/secrets"
-NGINX_SSL_KEY_DIR: "/secrets"
+NGINX_SSL_CERTIFICATE_DIR: "/secrets/nginx-cert"
+NGINX_SSL_KEY_DIR: "/secrets/nginx-cert"
 NGINX_SET_X_FORWARDED_HEADERS: True #set to True if not behind load balancer
 EDXAPP_LMS_NGINX_PORT: 80
 EDXAPP_LMS_SSL_NGINX_PORT: 443

@@ -25,9 +25,15 @@ spec:
           containerPort: 443
         volumeMounts:
         - name: nginx-cert
-          mountPath: /secrets
+          mountPath: /secrets/nginx-cert
+          readOnly: true
+        - name: secret-vars
+          mountPath: /secrets/secret-vars
           readOnly: true
       volumes:
       - name: nginx-cert
         secret:
           secretName: nginx-cert
+      - name: secret-vars
+        secret:
+          secretName: edxapp

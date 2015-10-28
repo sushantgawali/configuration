@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+cd /var/tmp/configuration/playbooks && \
+    ansible-playbook edxapp.yml -i localhost, -c local -e @/root/vars.yml \
+        -e @/secrets/secret-vars/edxapp --tags "edxapp_cfg"
+/edx/bin/supervisorctl restart edxapp:
+sleep infinity  # Sleep forever so runit doesn't restart this script
