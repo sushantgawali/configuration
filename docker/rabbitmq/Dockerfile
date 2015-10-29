@@ -10,7 +10,6 @@ ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update && apt-get -y install gcc python-dev python-apt python-setuptools git-core && easy_install pip && apt-get -y clean
 ADD vars.yml /root/
-ADD secrets.yml /root/
 RUN git clone https://github.com/appsembler/configuration.git -b docker_multi_release /var/tmp/configuration
 
 WORKDIR /var/tmp/configuration
@@ -23,7 +22,7 @@ RUN chmod 777 /root/setup
 RUN /root/setup && apt-get clean
 
 # Properly initialize RabbitMQ on container startup
-ADD rabbitmq-configure /etc/service/rabbitmq-configure/run
+ADD configure /etc/service/configure/run
 
 EXPOSE 5672 15672
 
