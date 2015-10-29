@@ -19,3 +19,11 @@ spec:
         ports:
         - name: xqueue
           containerPort: 18040
+        volumeMounts:
+        - name: secret-vars
+          mountPath: /secrets/secret-vars
+          readOnly: true
+      volumes:
+      - name: secret-vars
+        secret:
+          secretName: xqueue

@@ -23,12 +23,14 @@
 - name: create xqueue application config
   template: src=xqueue.env.json.j2 dest={{ xqueue_app_dir }}/xqueue.env.json mode=0644
   sudo_user: "{{ xqueue_user }}"
+  tags: xqueue_cfg
   notify:
     - restart xqueue
 
 - name: create xqueue auth file
   template: src=xqueue.auth.json.j2 dest={{ xqueue_app_dir }}/xqueue.auth.json mode=0644
   sudo_user: "{{ xqueue_user }}"
+  tags: xqueue_cfg
   notify:
     - restart xqueue
 
@@ -67,26 +69,31 @@
   notify:
     - restart xqueue
 
-# TODO: Move all MySQL operations to role that configures MySQL
 # If there is a common user for migrations run migrations using his username
 # and credentials. If not we use the xqueue mysql user
-#- name: syncdb and migrate
-#  shell: >
-#    SERVICE_VARIANT=xqueue {{ xqueue_venv_bin }}/django-admin.py syncdb --migrate --noinput --settings=xqueue.aws_migrate --pythonpath={{ xqueue_code_dir }}
-#  sudo_user: "{{ xqueue_user }}"
-#  environment:
-#    DB_MIGRATION_USER: "{{ COMMON_MYSQL_MIGRATE_USER }}"
-#    DB_MIGRATION_PASS: "{{ COMMON_MYSQL_MIGRATE_PASS }}"
-#  when: migrate_db is defined and migrate_db|lower == "yes" and COMMON_MYSQL_MIGRATE_PASS
-#  notify:
-#    - restart xqueue
-#
-#- name: create users
-#  shell: >
-#    SERVICE_VARIANT=xqueue {{ xqueue_venv_bin }}/django-admin.py update_users --settings=xqueue.aws_settings --pythonpath={{ xqueue_code_dir }}
-#  sudo_user: "{{ xqueue_user }}"
-#  notify:
-#    - restart xqueue
+- name: syncdb and migrate
+  shell: >
+    SERVICE_VARIANT=xqueue {{ xqueue_venv_bin }}/django-admin.py syncdb --migrate --noinput --settings=xqueue.aws_migrate --pythonpath={{ xqueue_code_dir }}
+  sudo_user: "{{ xqueue_user }}"
+  environment:
+    DB_MIGRATION_USER: "{{ COMMON_MYSQL_MIGRATE_USER }}"
+    DB_MIGRATION_PASS: "{{ COMMON_MYSQL_MIGRATE_PASS }}"
+  when: migrate_db is defined and migrate_db|lower == "yes" and COMMON_MYSQL_MIGRATE_PASS
+  notify:
+    - restart xqueue
+  tags:
+    - manage
+    - manage:app-users
+
+- name: create users
+  shell: >
+    SERVICE_VARIANT=xqueue {{ xqueue_venv_bin }}/django-admin.py update_users --settings=xqueue.aws_settings --pythonpath={{ xqueue_code_dir }}
+  sudo_user: "{{ xqueue_user }}"
+  notify:
+    - restart xqueue
+  tags:
+    - manage
+    - manage:app-users
 
   # call supervisorctl update. this reloads
   # the supervisorctl config and restarts
