@@ -3,8 +3,8 @@
 REGISTRY = us.gcr.io
 PROJECT = appsemblerx
 MAJOR = 0
-MINOR = 1
-PATCH = 1
+MINOR = 2
+PATCH = 0
 
 build:
 	docker build -t $(REGISTRY)/$(PROJECT)/edx-multi-mysql:latest .
