@@ -1,6 +1,8 @@
 xqueue_version: 'named-release/cypress'
 XQUEUE_NGINX_PORT: 18040
 
+XQUEUE_BASIC_AUTH_USER: 'edx'
+
 XQUEUE_RABBITMQ_USER: 'edx'
 #XQUEUE_RABBITMQ_PASS: ''
 XQUEUE_RABBITMQ_HOSTNAME: 'rabbitmq'
