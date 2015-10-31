@@ -23,6 +23,7 @@
   - roles/analytics_api/defaults/main.yml
   roles:
   - mysql
+  - memcached
 
 - name: Configure instance(s)
   hosts: "edxapp-server"
