@@ -1,14 +1,10 @@
-# edX XQueue
-#
-# VERSION   0.1.0
-
 FROM phusion/baseimage:0.9.15
-MAINTAINER Morgan Robertson <morgan@appsembler.com>
+MAINTAINER Appsembler <info@appsembler.com>
 
 ENV HOME /root
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update && apt-get -y install gcc python-dev python-apt python-setuptools git-core && easy_install pip && apt-get -y clean
+RUN apt-get update && apt-get -y install gcc python-dev python-apt python-setuptools git-core && easy_install pip && apt-get clean
 ADD vars.yml /root/
 RUN git clone https://github.com/appsembler/configuration.git -b docker_multi_release /var/tmp/configuration
 
