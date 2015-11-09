@@ -239,11 +239,3 @@
   notify:
     - restart mysql
 
-- name: install memcached
-  apt: pkg=memcached state=present
-
-- name: copy memcached config
-  template: >
-    src=memcached.conf.j2
-    dest=/etc/memcached.conf
-
