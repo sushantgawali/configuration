@@ -1,7 +1,21 @@
 #!/bin/sh
 set -e
+
+# Regenerate config files with secrets
 cd /var/tmp/configuration/playbooks && \
     ansible-playbook edxapp.yml -i localhost, -c local -e @/root/vars.yml \
         -e @/secrets/secret-vars/edxapp --tags "edxapp_cfg"
+
+# Run migrations
+cd /edx/app/edxapp/edx-platform && sudo -u www-data -E /edx/bin/python.edxapp ./manage.py lms syncdb --migrate --noinput --settings docker_multi
+cd /edx/app/edxapp/edx-platform && sudo -u www-data -E /edx/bin/python.edxapp ./manage.py cms syncdb --migrate --noinput --settings docker_multi
+
+# Configure static assets
+. /edx/app/edxapp/edxapp_env
+tar -xzf /resources/static/staticfiles.tar.gz -C /edx/var/edxapp/staticfiles
+cd /edx/app/edxapp/edx-platform && ./manage.py lms collectstatic --noinput --settings=docker_multi
+cd /edx/app/edxapp/edx-platform && ./manage.py cms collectstatic --noinput --settings=docker_multi
+
+
 /edx/bin/supervisorctl restart edxapp:
 sleep infinity  # Sleep forever so runit doesn't restart this script

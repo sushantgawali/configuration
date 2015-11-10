@@ -26,7 +26,8 @@ COMMON_MYSQL_MIGRATE_USER: "{{ EDXAPP_MYSQL_USER }}"
 EDXAPP_MEMCACHE: [ 'memcached:11211' ]
 
 # Mongo DB
-EDXAPP_MONGO_HOSTS: ['mongodb']
+#EDXAPP_MONGO_HOSTS: ['mongodb']
+EDXAPP_MONGO_HOSTS: 'mongodb'
 EDXAPP_MONGO_PORT: 27017
 EDXAPP_MONGO_DB_NAME: 'edxapp'
 EDXAPP_MONGO_USER: 'edxapp'
@@ -52,11 +53,9 @@ edx_ansible_source_repo: "https://github.com/appsembler/configuration.git"
 configuration_version: "docker_multi_release"
 
 # Serve static assets from S3
-EDXAPP_DEFAULT_FILE_STORAGE: "storages.backends.s3boto.S3BotoStorage"
-EDXAPP_AWS_STORAGE_BUCKET_NAME: "appsemblerx-static"
-EDXAPP_STATIC_URL_BASE: "https://appsemblerx-static.s3.amazonaws.com/"
 EDXAPP_ENV_EXTRA:
-  STATICFILES_STORAGE: "pavelib.utils.storage.S3ZippedPipelineStorage"
+  STATICFILES_STORAGE: 'pipeline.storage.NonPackagingPipelineCachedStorage'
+EDXAPP_STATIC_URL_BASE: 'https://d1r5lx196b9wz7.cloudfront.net/static/'
 
 
 ## Appsembler Academy ##

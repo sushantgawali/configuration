@@ -30,6 +30,9 @@ spec:
         - name: secret-vars
           mountPath: /secrets/secret-vars
           readOnly: true
+        - name: static-assets
+          mountPath: /resources/static
+          readOnly: true
       volumes:
       - name: nginx-cert
         secret:
@@ -37,3 +40,6 @@ spec:
       - name: secret-vars
         secret:
           secretName: edxapp
+      - name: static-assets
+        hostPath:
+          path: /resources/static
