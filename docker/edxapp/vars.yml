@@ -52,7 +52,7 @@ EDXAPP_RABBIT_HOSTNAME: 'rabbitmq'
 edx_ansible_source_repo: "https://github.com/appsembler/configuration.git"
 configuration_version: "docker_multi_release"
 
-# Serve static assets from S3
+# Static assets
 EDXAPP_ENV_EXTRA:
   STATICFILES_STORAGE: 'pipeline.storage.NonPackagingPipelineCachedStorage'
 EDXAPP_STATIC_URL_BASE: 'https://d1r5lx196b9wz7.cloudfront.net/static/'
@@ -201,7 +201,11 @@ EDXAPP_EMAIL_USE_TLS: true
 # AWS S3 configuration
 #EDXAPP_AWS_ACCESS_KEY_ID: "xxxxx"
 #EDXAPP_AWS_SECRET_ACCESS_KEY: "xxxxx"
-#EDXAPP_AWS_STORAGE_BUCKET_NAME: "bucket-edxuploads"
+EDXAPP_AWS_STORAGE_BUCKET_NAME: "appsemblerx-academy-bucket"
+EDXAPP_DEFAULT_FILE_STORAGE: "storages.backends.s3boto.S3BotoStorage"
+EDXAPP_GRADE_STORAGE_TYPE: 's3'
+EDXAPP_GRADE_BUCKET: 'appsemblerx-academy-grade-bucket'
+EDXAPP_GRADE_ROOT_PATH: 'grades'
 
 # Setting up New Relic
 #COMMON_ENABLE_NEWRELIC: True
