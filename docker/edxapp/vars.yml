@@ -118,7 +118,7 @@ EDXAPP_FEATURES:
   SEGMENT_IO_LMS: true
 
 EDXAPP_MOBILE_STORE_URLS:
-  APPLE: "https://itunes.apple.com/us/app/appsembler-academy/id1044418100?ls=1&mt=8"
+  apple: "https://itunes.apple.com/us/app/appsembler-academy/id1044418100?ls=1&mt=8"
 
 #EDXAPP_SEGMENT_IO_LMS_KEY: ""
 
