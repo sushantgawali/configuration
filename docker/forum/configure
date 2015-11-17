@@ -3,5 +3,6 @@ set -e
 cd /var/tmp/configuration/playbooks && \
     ansible-playbook forum.yml -i localhost, -c local -e @/root/vars.yml \
         -e @/secrets/secret-vars/forum --tags "forum_cfg"
+rm /edx/var/forum/forum.sock || true  # Remove stale socket if it exists
 sv restart forum
 sleep infinity  # Sleep forever so runit doesn't restart this script
