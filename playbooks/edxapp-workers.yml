@@ -1,0 +1,12 @@
+- name: Deploy edxapp
+  hosts: all
+  sudo: True
+  gather_facts: True
+  vars:
+    migrate_db: "no"
+  roles:
+    - { role: 'docker', runit_service: 'supervisor', supervisor_version: 'solo' }
+    - { role: 'docker', runit_service: 'supervisor.devpi' }
+    - { role: 'edxapp', celery_worker: True }
+    - { role: 'docker', runit_service: 'supervisor.devpi' }
+    - { role: 'docker', runit_service: 'supervisor', supervisor_version: 'solo' }
