@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ReplicationController
+
+metadata:
+  name: edxapp-workers-controller
+  labels:
+    name: edxapp-workers
+
+spec:
+  replicas: 1
+  selector:
+    name: edxapp-workers
+  template:
+    metadata:
+      labels:
+        name: edxapp-workers
+    spec:
+      containers:
+      - name: edxapp-workers
+        image: us.gcr.io/appsemblerx/edx-multi-edxapp-workers
+        volumeMounts:
+        - name: secret-vars
+          mountPath: /secrets/secret-vars
+          readOnly: true
+      volumes:
+      - name: secret-vars
+        secret:
+          secretName: edxapp

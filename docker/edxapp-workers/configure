@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# Regenerate config files with secrets
+cd /var/tmp/configuration/playbooks && \
+    ansible-playbook edxapp-workers.yml -i localhost, -c local -e @/root/vars.yml \
+        -e @/secrets/secret-vars/edxapp --tags "edxapp_cfg"
+
+/edx/bin/supervisorctl restart edxapp_worker:
+sleep infinity  # Sleep forever so runit doesn't restart this script
