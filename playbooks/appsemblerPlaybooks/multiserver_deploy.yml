@@ -26,20 +26,13 @@
   - memcached
 
 - name: Configure instance(s)
-  hosts: "edxapp-server"
+  hosts: "edxapp-primary-server"
   sudo: True
   gather_facts: True
   vars:
-    serial_count: 1
     migrate_db: "yes"
     openid_workaround: True
     EDXAPP_LMS_NGINX_PORT: '80'
-    #edx_platform_version: 'master'
-    # Set to false if deployed behind another proxy/load balancer.
-    #NGINX_SET_X_FORWARDED_HEADERS: True
-    # These should stay false for the public AMI
-    #COMMON_ENABLE_DATADOG: False
-    #COMMON_ENABLE_SPLUNKFORWARDER: False
   roles:
     - role: nginx
       nginx_sites:
@@ -50,8 +43,42 @@
       - xqueue
       nginx_default_sites:
       - lms
-#- edxlocal
-#- mongo
+    - { role: 'edxapp', celery_worker: True }
+    - edxapp
+    - demo
+    - { role: 'rabbitmq', rabbitmq_ip: '127.0.0.1' }
+    - oraclejdk
+    - elasticsearch
+    - forum
+    - { role: "xqueue", update_users: True }
+    - ora
+    - certs
+    - edx_ansible
+    - role: datadog
+      when: COMMON_ENABLE_DATADOG
+    - role: splunkforwarder
+      when: COMMON_ENABLE_SPLUNKFORWARDER
+    - role: newrelic
+      when: COMMON_ENABLE_NEWRELIC
+
+- name: Configure instance(s)
+  hosts: "edxapp-additional-server"
+  sudo: True
+  gather_facts: True
+  vars:
+    migrate_db: "no"
+    openid_workaround: True
+    EDXAPP_LMS_NGINX_PORT: '80'
+  roles:
+    - role: nginx
+      nginx_sites:
+      - cms
+      - lms
+      - forum
+      - ora
+      - xqueue
+      nginx_default_sites:
+      - lms
     - { role: 'edxapp', celery_worker: True }
     - edxapp
     - demo
