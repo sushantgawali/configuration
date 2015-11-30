@@ -16,3 +16,6 @@ cd /configuration/playbooks && \
         -e demo_course_id=Appsembler/TEST205/course \
         -e demo_code_dir=/edx/app/demo/appsembler-demo-course \
         -e demo_repo=https://github.com/emrob/demo-course \
+
+# Enable celery workers. We do this here to avoid rerunning the edxapp role.
+ln -s /edx/app/supervisor/conf.available.d/workers.conf /edx/app/supervisor/conf.d/workers.conf
