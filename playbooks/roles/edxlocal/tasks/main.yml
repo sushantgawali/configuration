@@ -42,10 +42,12 @@
     dest='/etc/mysql/my.cnf'
     regexp='{{ item.regexp }}'
     line='{{ item.line }}'
+    insertafter='{{ item.insertafter }}'
   with_items:
-    - { regexp: '^server-id', line: 'server-id = {{ ansible_hostname | hash("md5") }}' }
-    - { regexp: '^log-bin', line: 'log-bin = master-bin' }
-    - { regexp: '^log-bin-index', line: 'log-bin-index = master-bin.index' }
+    - { regexp: '^\[mysqld\]$', line: '[mysqld]', insertafter: 'EOF' }
+    - { regexp: '^server-id\b', line: 'server-id = {{ ansible_hostname | hash("md5") }}', insertafter: '^\[mysqld\]$' }
+    - { regexp: '^log-bin\b', line: 'log-bin = master-bin', insertafter: '^\[mysqld\]$' }
+    - { regexp: '^log-bin-index\b', line: 'log-bin-index = master-bin.index', insertafter: '^\[mysqld\]$' }
   when: EDXLOCAL_REPL_ROLE == 'master'
 
 - name: configure replication slave
@@ -53,10 +55,12 @@
     dest='/etc/mysql/my.cnf'
     regexp='{{ item.regexp }}'
     line='{{ item.line }}'
+    insertafter='{{ item.insertafter }}'
   with_items:
-    - { regexp: '^server-id', line: 'server-id = {{ ansible_hostname | hash("md5") }}' }
-    - { regexp: '^relay-log-index', line: 'relay-log-index = slave-relay-bin.index' }
-    - { regexp: '^relay-log', line: 'relay-log = slave-relay-bin' }
+    - { regexp: '^\[mysqld\]$', line: '[mysqld]', insertafter: 'EOF' }
+    - { regexp: '^server-id\b', line: 'server-id = {{ ansible_hostname | hash("md5") }}', insertafter: '^\[mysqld\]$' }
+    - { regexp: '^relay-log\b', line: 'relay-log = slave-relay-bin', insertafter: '^\[mysqld\]$' }
+    - { regexp: '^relay-log-index\b', line: 'relay-log-index = slave-relay-bin.index', insertafter: '^\[mysqld\]$' }
   when: EDXLOCAL_REPL_ROLE == 'slave'
 
 - name: start mysql
