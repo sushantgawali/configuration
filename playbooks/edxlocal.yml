@@ -1,0 +1,14 @@
+- name: Configure MySQL instance
+  hosts: all
+  sudo: True
+  gather_facts: True
+  vars_files:
+    - roles/common/defaults/main.yml
+    - roles/analytics_api/defaults/main.yml
+    - roles/edx_notes_api/defaults/main.yml
+    - roles/edxapp/defaults/main.yml
+    - roles/ecommerce/defaults/main.yml
+    - roles/ora/defaults/main.yml
+    - roles/xqueue/defaults/main.yml
+  roles:
+    - edxlocal
