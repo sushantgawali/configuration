@@ -45,7 +45,7 @@
     insertafter='{{ item.insertafter }}'
   with_items:
     - { regexp: '^\[mysqld\]$', line: '[mysqld]', insertafter: 'EOF' }
-    - { regexp: '^server-id\b', line: 'server-id = {{ ansible_hostname | hash("md5") }}', insertafter: '^\[mysqld\]$' }
+    - { regexp: '^server-id\b', line: 'server-id = {{ EDXLOCAL_SERVER_ID }}', insertafter: '^\[mysqld\]$' }
     - { regexp: '^log-bin\b', line: 'log-bin = master-bin', insertafter: '^\[mysqld\]$' }
     - { regexp: '^log-bin-index\b', line: 'log-bin-index = master-bin.index', insertafter: '^\[mysqld\]$' }
   when: EDXLOCAL_REPL_ROLE == 'master'
@@ -58,7 +58,7 @@
     insertafter='{{ item.insertafter }}'
   with_items:
     - { regexp: '^\[mysqld\]$', line: '[mysqld]', insertafter: 'EOF' }
-    - { regexp: '^server-id\b', line: 'server-id = {{ ansible_hostname | hash("md5") }}', insertafter: '^\[mysqld\]$' }
+    - { regexp: '^server-id\b', line: 'server-id = {{ EDXLOCAL_SERVER_ID }}', insertafter: '^\[mysqld\]$' }
     - { regexp: '^relay-log\b', line: 'relay-log = slave-relay-bin', insertafter: '^\[mysqld\]$' }
     - { regexp: '^relay-log-index\b', line: 'relay-log-index = slave-relay-bin.index', insertafter: '^\[mysqld\]$' }
   when: EDXLOCAL_REPL_ROLE == 'slave'
