@@ -37,11 +37,57 @@
     - software-properties-common
     - mysql-server
 
+- name: configure replication master
+  lineinfile: >
+    dest='/etc/mysql/my.cnf'
+    regexp='{{ item.regexp }}'
+    line='{{ item.line }}'
+  with_items:
+    - { regexp: '^server-id', line: 'server-id = {{ ansible_hostname | hash("md5") }}' }
+    - { regexp: '^log-bin', line: 'log-bin = master-bin' }
+    - { regexp: '^log-bin-index', line: 'log-bin-index = master-bin.index' }
+  when: EDXLOCAL_REPL_ROLE == 'master'
+
+- name: configure replication slave
+  lineinfile: >
+    dest='/etc/mysql/my.cnf'
+    regexp='{{ item.regexp }}'
+    line='{{ item.line }}'
+  with_items:
+    - { regexp: '^server-id', line: 'server-id = {{ ansible_hostname | hash("md5") }}' }
+    - { regexp: '^relay-log-index', line: 'relay-log-index = slave-relay-bin.index' }
+    - { regexp: '^relay-log', line: 'relay-log = slave-relay-bin' }
+  when: EDXLOCAL_REPL_ROLE == 'slave'
+
 - name: start mysql
   service: name=mysql state=started
-    
+
 - name: install packages needed for single server
   apt: pkg={{','.join(edxlocal_debian_pkgs)}} install_recommends=yes state=present
+
+- name: stop replication on slave
+  mysql_replication: mode=stopslave
+  when: EDXLOCAL_REPL_ROLE == 'slave'
+
+- name: set master on slave
+  mysql_replication: >
+    mode=changemaster
+    master_host={{ EDXLOCAL_REPL_MASTER_HOST }}
+    master_port={{ EDXLOCAL_REPL_MASTER_PORT }}
+    master_user={{ EDXLOCAL_REPL_USER }}
+    master_password={{ EDXLOCAL_REPL_PASSWORD }}
+  when: EDXLOCAL_REPL_ROLE == 'slave'
+
+- name: start replication on slave
+  mysql_replication: mode=startslave
+  when: EDXLOCAL_REPL_ROLE == 'slave'
+
+- name: setup the replication user
+  mysql_user: >
+    name={{ EDXLOCAL_REPL_USER }}
+    password={{ EDXLOCAL_REPL_PASSWORD }}
+    priv=*.*:"REPLICATION SLAVE"
+  when: EDXLOCAL_REPL_ROLE == 'master'
 
 - name: setup the edxapp db user
   mysql_user: >
