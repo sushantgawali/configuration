@@ -73,13 +73,23 @@
   mysql_replication: mode=stopslave
   when: EDXLOCAL_REPL_ROLE == 'slave'
 
+#- name: set master on slave
+#  mysql_replication: >
+#    mode=changemaster
+#    master_host={{ EDXLOCAL_REPL_MASTER_HOST }}
+#    master_port={{ EDXLOCAL_REPL_MASTER_PORT }}
+#    master_user={{ EDXLOCAL_REPL_USER }}
+#    master_password={{ EDXLOCAL_REPL_PASSWORD }}
+#  when: EDXLOCAL_REPL_ROLE == 'slave'
+
+# Workaround: The mysql_replication module fails when SSL/TLS is not enabled
 - name: set master on slave
-  mysql_replication: >
-    mode=changemaster
-    master_host={{ EDXLOCAL_REPL_MASTER_HOST }}
-    master_port={{ EDXLOCAL_REPL_MASTER_PORT }}
-    master_user={{ EDXLOCAL_REPL_USER }}
-    master_password={{ EDXLOCAL_REPL_PASSWORD }}
+  shell: >
+    echo "CHANGE MASTER TO
+    MASTER_HOST = '{{ EDXLOCAL_REPL_MASTER_HOST }}',
+    MASTER_PORT = {{ EDXLOCAL_REPL_MASTER_PORT }},
+    MASTER_USER = '{{ EDXLOCAL_REPL_USER }}',
+    MASTER_PASSWORD = '{{ EDXLOCAL_REPL_PASSWORD }}';" | mysql
   when: EDXLOCAL_REPL_ROLE == 'slave'
 
 - name: start replication on slave
