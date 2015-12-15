@@ -103,6 +103,7 @@
     name={{ EDXLOCAL_REPL_USER }}
     password={{ EDXLOCAL_REPL_PASSWORD }}
     priv=*.*:"REPLICATION SLAVE"
+    host='{{ EDXLOCAL_USER_HOST }}'
   when: EDXLOCAL_REPL_ROLE == 'master'
 
 - name: setup the edxapp db user
@@ -110,6 +111,7 @@
     name={{ EDXAPP_MYSQL_USER }}
     password={{ EDXAPP_MYSQL_PASSWORD }}
     priv='{{ EDXAPP_MYSQL_DB_NAME }}.*:ALL'
+    host='{{ EDXLOCAL_USER_HOST }}'
   when: EDXAPP_MYSQL_USER is defined
 
 - name: create a database for edxapp
@@ -124,6 +126,7 @@
     name={{ XQUEUE_MYSQL_USER }}
     password={{ XQUEUE_MYSQL_PASSWORD }}
     priv='{{ XQUEUE_MYSQL_DB_NAME }}.*:ALL'
+    host='{{ EDXLOCAL_USER_HOST }}'
   when: XQUEUE_MYSQL_USER is defined
 
 - name: create a database for xqueue
@@ -138,6 +141,7 @@
     name={{ ORA_MYSQL_USER }}
     password={{ ORA_MYSQL_PASSWORD }}
     priv='{{ ORA_MYSQL_DB_NAME }}.*:ALL'
+    host='{{ EDXLOCAL_USER_HOST }}'
   when: ORA_MYSQL_USER is defined
 
 - name: create a database for ora
@@ -176,6 +180,7 @@
     name="{{ ECOMMERCE_DEFAULT_DB_NAME }}"
     password="{{ ECOMMERCE_DATABASES.default.PASSWORD }}"
     priv='{{ ECOMMERCE_DEFAULT_DB_NAME }}.*:SELECT,INSERT,UPDATE,DELETE'
+    host='{{ EDXLOCAL_USER_HOST }}'
   when: ECOMMERCE_DEFAULT_DB_NAME is defined
 
 - name: create api user for the analytics api
@@ -183,6 +188,7 @@
     name=api001
     password="{{ ANALYTICS_API_DATABASES.default.PASSWORD }}"
     priv='{{ ANALYTICS_API_DATABASES.default.NAME }}.*:ALL/reports.*:SELECT'
+    host='{{ EDXLOCAL_USER_HOST }}'
   when: ANALYTICS_API_SERVICE_CONFIG is defined
 
 - name: create read-only reports user for the analytics-api
@@ -190,6 +196,7 @@
     name=reports001
     password="{{ ANALYTICS_API_DATABASES.reports.PASSWORD }}"
     priv='{{ ANALYTICS_API_DATABASES.reports.NAME }}.*:SELECT'
+    host='{{ EDXLOCAL_USER_HOST }}'
   when: ANALYTICS_API_SERVICE_CONFIG is defined
 
 - name: setup the edx-notes-api db user
@@ -197,6 +204,7 @@
     name={{ EDX_NOTES_API_MYSQL_DB_USER }}
     password={{ EDX_NOTES_API_MYSQL_DB_PASS }}
     priv='{{ EDX_NOTES_API_MYSQL_DB_NAME }}.*:SELECT,INSERT,UPDATE,DELETE'
+    host='{{ EDXLOCAL_USER_HOST }}'
   when: EDX_NOTES_API_MYSQL_DB_USER is defined
 
 - name: create a database for edx-notes-api
@@ -212,6 +220,7 @@
     password={{ COMMON_MYSQL_MIGRATE_PASS }}
     priv='{{ item }}.*:ALL'
     append_privs=yes
+    host='{{ EDXLOCAL_USER_HOST }}'
   when: item != 'None'
   with_items:
     - "{{ EDXAPP_MYSQL_DB_NAME|default('None') }}"
@@ -228,12 +237,14 @@
     name={{ COMMON_MYSQL_READ_ONLY_USER }}
     password={{ COMMON_MYSQL_READ_ONLY_PASS }}
     priv='*.*:ALL'
+    host='{{ EDXLOCAL_USER_HOST }}'
 
 - name: setup the admin db user
   mysql_user: >
     name={{ COMMON_MYSQL_ADMIN_USER }}
     password={{ COMMON_MYSQL_ADMIN_PASS }}
     priv='*.*:CREATE USER'
+    host='{{ EDXLOCAL_USER_HOST }}'
 
 
 - name: install memcached
