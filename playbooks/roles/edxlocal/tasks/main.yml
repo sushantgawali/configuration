@@ -119,7 +119,7 @@
     db=edxapp
     state=present
     encoding=utf8
-  when: EDXAPP_MYSQL_USER is defined
+  when: EDXAPP_MYSQL_USER is defined and EDXLOCAL_REPL_ROLE != 'slave'
 
 - name: setup the xqueue db user
   mysql_user: >
@@ -134,7 +134,7 @@
     db=xqueue
     state=present
     encoding=utf8
-  when: XQUEUE_MYSQL_USER is defined
+  when: XQUEUE_MYSQL_USER is defined and EDXLOCAL_REPL_ROLE != 'slave'
 
 - name: setup the ora db user
   mysql_user: >
@@ -149,14 +149,14 @@
     db=ora
     state=present
     encoding=utf8
-  when: ORA_MYSQL_USER is defined
+  when: ORA_MYSQL_USER is defined and EDXLOCAL_REPL_ROLE != 'slave'
 
 - name: create databases for analytics api
   mysql_db: >
     db={{ item }}
     state=present
     encoding=utf8
-  when: ANALYTICS_API_SERVICE_CONFIG is defined
+  when: ANALYTICS_API_SERVICE_CONFIG is defined and EDXLOCAL_REPL_ROLE != 'slave'
   with_items:
     - "{{ ANALYTICS_API_SERVICE_CONFIG['DATABASES']['default']['NAME'] }}"
     - "{{ ANALYTICS_API_SERVICE_CONFIG['DATABASES']['reports']['NAME'] }}"
@@ -166,14 +166,14 @@
     db={{ INSIGHTS_DATABASES.default.NAME }}
     state=present
     encoding=utf8
-  when: INSIGHTS_DATABASES is defined
+  when: INSIGHTS_DATABASES is defined and EDXLOCAL_REPL_ROLE != 'slave'
 
 - name: create database for ecommerce
   mysql_db: >
     db="{{ ECOMMERCE_DEFAULT_DB_NAME }}"
     state=present
     encoding=utf8
-  when: ECOMMERCE_DEFAULT_DB_NAME is defined
+  when: ECOMMERCE_DEFAULT_DB_NAME is defined and EDXLOCAL_REPL_ROLE != 'slave'
 
 - name: setup users for ecommerce
   mysql_user: >
@@ -212,7 +212,7 @@
     db={{ EDX_NOTES_API_MYSQL_DB_NAME }}
     state=present
     encoding=utf8
-  when: EDX_NOTES_API_MYSQL_DB_USER is defined
+  when: EDX_NOTES_API_MYSQL_DB_USER is defined and EDXLOCAL_REPL_ROLE != 'slave'
 
 - name: setup the migration db user
   mysql_user: >
