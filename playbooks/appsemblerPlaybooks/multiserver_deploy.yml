@@ -25,6 +25,42 @@
   - mysql
   - memcached
 
+- name: Configure mysql master
+  hosts: "mysql-master-server"
+  sudo: True
+  gather_facts: True
+  vars_files:
+  - roles/edxlocal/defaults/main.yml
+  - roles/edxapp/defaults/main.yml
+  - roles/xqueue/defaults/main.yml
+  - roles/ora/defaults/main.yml
+  - roles/analytics_api/defaults/main.yml
+  vars:
+  - EDXLOCAL_REPL_ROLE: "master"
+  - EDXLOCAL_REPL_MASTER_HOST: "mysql-master"
+  - EDXLOCAL_BIND_IP: "0.0.0.0"
+  - EDXLOCAL_USER_HOST: "%"
+  roles:
+  - edxlocal_repl
+  - memcached
+
+- name: Configure mysql slave
+  hosts: "mysql-slave-server"
+  sudo: True
+  gather_facts: True
+  vars_files:
+  - roles/edxlocal/defaults/main.yml
+  - roles/edxapp/defaults/main.yml
+  - roles/xqueue/defaults/main.yml
+  - roles/ora/defaults/main.yml
+  - roles/analytics_api/defaults/main.yml
+  vars:
+  - EDXLOCAL_REPL_ROLE: "slave"
+  - EDXLOCAL_REPL_MASTER_HOST: "mysql-master"
+  roles:
+  - edxlocal_repl
+  - memcached
+
 - name: Configure instance(s)
   hosts: "edxapp-primary-server"
   sudo: True
