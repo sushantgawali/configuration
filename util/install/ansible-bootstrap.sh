@@ -22,7 +22,7 @@ if [[ -z "${ANSIBLE_VERSION}" ]]; then
 fi
 
 if [[ -z "${CONFIGURATION_REPO}" ]]; then
-  CONFIGURATION_REPO="https://github.com/edx/configuration.git"
+  CONFIGURATION_REPO="https://github.com/appsembler/configuration.git"
 fi
 
 if [[ -z "${CONFIGURATION_VERSION}" ]]; then
@@ -72,9 +72,9 @@ then
 elif grep -q 'Trusty Tahr' /etc/os-release
 then
     SHORT_DIST="trusty"
-else    
+else
     cat << EOF
-    
+
     This script is only known to work on Ubuntu Precise and Trusty,
     exiting.  If you are interested in helping make installation possible
     on other platforms, let us know.
@@ -122,7 +122,7 @@ pip install virtualenv=="${VIRTUAL_ENV_VERSION}"
 
 PATH="${PYTHON_BIN}":${PATH}
 
-# Install the configuration repository to install 
+# Install the configuration repository to install
 # edx_ansible role
 git clone ${CONFIGURATION_REPO} ${CONFIGURATION_DIR}
 cd ${CONFIGURATION_DIR}
@@ -141,10 +141,9 @@ cat << EOF
 ******************************************************************************
 
 Done bootstrapping, edx_ansible is now installed in /edx/app/edx_ansible.
-Time to run some plays.  Activate the virtual env with 
+Time to run some plays.  Activate the virtual env with
 
-> . /edx/app/edx_ansible/venvs/edx_ansible/bin/activate 
+> . /edx/app/edx_ansible/venvs/edx_ansible/bin/activate
 
 ******************************************************************************
 EOF
-
