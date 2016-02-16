@@ -27,6 +27,8 @@
       - lms
       - forum
       - xqueue
+      - insights
+      - ecommerce
       nginx_default_sites:
       - lms
     - role: mysql
@@ -37,6 +39,7 @@
     - { role: 'edxapp', celery_worker: True }
     - edxapp
     - notifier
+    - ecommerce
     - analytics_api
     - analytics_pipeline
     - insights
