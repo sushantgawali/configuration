@@ -1,3 +1,9 @@
+{% if "ecommerce" in nginx_default_sites %}
+  {% set default_site = "default" %}
+{% else %}
+  {% set default_site = "" %}
+{% endif %}
+
 upstream {{ edx_notes_api_service_name }}_app_server {
     {% for host in nginx_edx_notes_api_gunicorn_hosts %}
         server {{ host }}:{{ edx_notes_api_gunicorn_port }} fail_timeout=0;
@@ -5,7 +11,7 @@ upstream {{ edx_notes_api_service_name }}_app_server {
 }
 
 server {
-  listen {{ edx_notes_api_nginx_port }} default_server;
+  listen {{ edx_notes_api_nginx_port }} {{default_site}};
   server_name {{ NOTES_HOSTNAME }};
 
   location / {
