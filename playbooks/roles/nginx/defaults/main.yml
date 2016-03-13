@@ -73,6 +73,8 @@ NGINX_EDXAPP_ERROR_PAGES:
 CMS_HOSTNAME: '~^((stage|prod)-)?studio.*'
 ECOMMERCE_HOSTNAME: '~^((stage|prod)-)?ecommerce.*'
 PROGRAMS_HOSTNAME: '~^((stage|prod)-)?programs.*'
+INSIGHTS_HOSTNAME: '~^((stage|prod)-)?insights.*'
+NOTES_HOSTNAME: '~^((stage|prod)-)?notes.*'
 
 nginx_template_dir: "edx/app/nginx/sites-available"
 
