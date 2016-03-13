@@ -1,3 +1,9 @@
+{% if "ecommerce" in nginx_default_sites %}
+  {% set default_site = "default" %}
+{% else %}
+  {% set default_site = "" %}
+{% endif %}
+
 upstream insights_app_server {
     {% for host in nginx_insights_gunicorn_hosts %}
         server {{ host }}:{{ insights_gunicorn_port }} fail_timeout=0;
@@ -5,7 +11,7 @@ upstream insights_app_server {
 }
 
 server {
-  listen {{ INSIGHTS_NGINX_PORT }} default_server;
+  listen {{ INSIGHTS_NGINX_PORT }} {{ default_site }};
   server_name {{ INSIGHTS_HOSTNAME }};
 
   location ~ ^/static/(?P<file>.*) {
