@@ -22,5 +22,5 @@
 
 	```shell
 	cd playbooks
-	ansible-playbook ./demo-server-fullstack.yml -i "104.196.58.70," -e @../server-vars.yml
+	ansible-playbook ./demo-server-fullstack.yml -i "104.196.58.70," -u <your_ssh_user> -e @../server-vars.yml
 	```
