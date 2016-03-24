@@ -14,9 +14,9 @@
 	```shell
 	virtualenv dogwood-demo
 	source dogwood-demo/bin/activate
-	pip install requirements.txt
+	pip install -r requirements.txt
 	```
-	
+
 3. Download the [server-vars.yml](https://github.com/noderabbit-team/edx-configs/blob/master/dogwood_demo/production/files/server-vars.yml) file from edx-configs repo and put it in the current folder
 4. Run the ansible playbook to provision the server (sudo pass is on the server in `/root`):
 
