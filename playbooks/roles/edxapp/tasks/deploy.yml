@@ -122,7 +122,7 @@
   # requirements are pathed relative to the edx-platform repo. Using the pip from inside the virtual environment implicitly
   # installs everything into that virtual environment.
   shell: >
-    {{ edxapp_venv_dir }}/bin/pip install -i {{ COMMON_PYPI_MIRROR_URL }} --exists-action -r {{ base_requirements_file }}
+    {{ edxapp_venv_dir }}/bin/pip install -i {{ COMMON_PYPI_MIRROR_URL }} --exists-action {{ base_requirements_file }}
     chdir={{ edxapp_code_dir }}
   environment: "{{ edxapp_environment }}"
   sudo_user: "{{ edxapp_user }}"
@@ -174,7 +174,7 @@
   # requirements are pathed relative to the edx-platform repo. Using the pip from inside the virtual environment implicitly
   # installs everything into that virtual environment.
   shell: >
-    {{ edxapp_venv_dir }}/bin/pip install -i {{ COMMON_PYPI_MIRROR_URL }} --exists-action -r {{ item }}
+    {{ edxapp_venv_dir }}/bin/pip install -i {{ COMMON_PYPI_MIRROR_URL }} --exists-action {{ item }}
     chdir={{ edxapp_code_dir }}
   with_items:
   - "{{ github_requirements_file }}"
@@ -188,7 +188,7 @@
   # requirements are pathed relative to the edx-platform repo. Using the pip from inside the virtual environment implicitly
   # installs everything into that virtual environment.
   shell: >
-    {{ edxapp_venv_dir }}/bin/pip install -i {{ COMMON_PYPI_MIRROR_URL }} --exists-action -r {{ item }}
+    {{ edxapp_venv_dir }}/bin/pip install -i {{ COMMON_PYPI_MIRROR_URL }} --exists-action {{ item }}
     chdir={{ edxapp_code_dir }}
   with_items:
   - "{{ private_requirements_file }}"
@@ -225,7 +225,7 @@
   # requirements are pathed relative to the edx-platform repo. Using the pip from inside the virtual environment implicitly
   # installs everything into that virtual environment.
   shell: >
-    {{ edxapp_venv_dir }}/bin/pip install -i {{ COMMON_PYPI_MIRROR_URL }} --exists-action -r {{ item }}
+    {{ edxapp_venv_dir }}/bin/pip install -i {{ COMMON_PYPI_MIRROR_URL }} --exists-action {{ item }}
     chdir={{ edxapp_code_dir }}
   with_items:
   - "{{ sandbox_base_requirements }}"
@@ -257,7 +257,7 @@
 
 - name: code sandbox | Install sandbox requirements into sandbox venv
   shell: >
-    {{ edxapp_sandbox_venv_dir }}/bin/pip install -i {{ COMMON_PYPI_MIRROR_URL }} --exists-action -r {{ item }}
+    {{ edxapp_sandbox_venv_dir }}/bin/pip install -i {{ COMMON_PYPI_MIRROR_URL }} --exists-action {{ item }}
     chdir={{ edxapp_code_dir }}
   with_items:
   - "{{ sandbox_local_requirements }}"
